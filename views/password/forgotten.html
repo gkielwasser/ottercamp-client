@@ -1,0 +1,31 @@
+<div id="forgot" class="block row-fluid margin-top">
+	<div class="header nav-header padding">{{'label_forgot_password'|trad}}</div>
+	    		
+	<form name="passwordForm" novalidate ng-submit="submitForgottenPassword()">
+		<div class="padding margin-top">
+			<div class="control-group">
+	    		<span class="help-block">{{'label_forgot_password_information'|trad}}</span>
+	    		
+	    		<div class="controls">
+	    			<div class="input-prepend">
+	    				<span class="add-on pop"><i class="icon-envelope"></i></span>
+	    				
+	      				<input type="email" class="input-xlarge" name="email" ng-model="myForgottenForm.email" 
+	      					placeholder="{{'label_email'|trad}}"
+	      					required
+	      					ng-blur ng-focus
+	      				>
+	      			</div>
+	      			<span class="clear"></span>
+	      			
+	      			<span class="text-error" ng-show="!emailshow && csValidate(formSent,passwordForm.email.$error.required,passwordForm.email.$pristine)">{{'error_member_email_missing'|trad}}</span>
+			    	<span class="text-error" ng-show="!emailshow && csValidate(formSent,passwordForm.email.$error.email,passwordForm.email.$pristine)">{{'error_member_email_invalid'|trad}}</span>
+				</div>
+			</div>
+		</div>
+					
+		<div class="form-actions">
+			<input type="submit" class="btn btn-primary changing" data-loading-text="{{'label_loading'|trad}}" value="{{'label_send'|trad}}"/>
+		</div>
+	</form>
+</div>

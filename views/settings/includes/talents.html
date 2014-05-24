@@ -1,0 +1,54 @@
+
+<div class="span9 margin-top" ng-init="initTalents()">
+	<div class="block">
+		<div class="header nav-header padding">{{'label_my_talents'|trad}}</div>
+		
+		<div class="margin-top padding" ng-hide="loading">
+			<div class="alert alert-info">{{'label_talents_information'|trad}}</div>
+			
+			<hr />
+			
+			<div class="alert alert-success" ng-show="talents.length == 0">{{'label_no_user_talents'|trad}}</div>
+				
+			<ul class="thumbnails">
+				<li class="span2" class="event" ng-repeat="talent in talents"fade>
+					<div>
+						<div class="thumbnail">
+							<button type="button" class="close" ng-click="deleteTalent(talent)" class="pull-right">×</button>
+							
+							<img ng-src="{{talent.picture}}" fade>
+						</div>
+						
+						<div class="caption text-center">
+							<h5>{{talent.label}}</h5>
+						</div>	
+					</div>
+				</li>
+			</ul>
+		</div>	
+			
+		<div class="offset5 margin-top" ng-show="loading" ><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+	</div>
+			
+	<div class="block margin-top" ng-hide="loading">
+		<div class="header nav-header padding">{{'label_all_talents'|trad}}</div>
+		
+		<div class="margin-top padding">
+			<ul class="thumbnails">
+				<li class="span2"
+					ng-repeat="tal in talentsList | filter: existant"
+					ng-click="addTalent(tal)" 
+					fade
+				>
+					<div>
+						<a href="" class="thumbnail"><img ng-src="{{tal.picture}}" fade></a>
+						
+						<div class="caption text-center">
+							<h5>{{tal.label}}</h5>
+						</div>	
+					</div>	
+				</li>
+			</ul>	
+		</div>
+	</div>
+</div>

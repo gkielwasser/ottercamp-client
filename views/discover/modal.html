@@ -1,0 +1,17 @@
+<div id="presentation" class="block span4 margin-top" ng-show="showPresentation">
+	<div class="modal-header marketing">
+		<button type="button" class="close" ng-click="showPresentation = false;hidePresentation();">&times;</button>
+	
+		<h2>{{"modal_presentation_title"|trad}}</h2>
+	</div>
+	
+	<div class="modal-body px15 text-justify">
+		{{"modal_presentation_content" | trad}}
+	</div>
+		
+	<div class="modal-footer">
+		<a class="btn btn-info" href="#/about" ng-click="hidePresentation();">{{'label_about'|trad}}</a>
+		<!--<a class="btn btn-success" ng-click="dismiss()">{{'label_discover'|trad}}</a>-->
+		<a class="btn btn-success" href="javascript:;" ng-click="showPresentation = false;hidePresentation();">{{'label_discover'|trad}}</a>
+	</div>
+</div>

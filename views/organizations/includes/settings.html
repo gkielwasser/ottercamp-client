@@ -1,0 +1,110 @@
+<div class="margin-top margin-bottom" ng-init="initSettings()">
+	
+	<!-- Form photo -->
+	<form>
+		<div class="row-fluid">
+			<div class="span3">
+				<span class="btn btn-success fileinput-button">
+	                <i class="icon-plus icon-white"></i>
+	                <span>{{'label_upload_event_modify'|trad}}</span>
+	                <input file-upload cs-type="organizationSettingsCtrl" id="photo" type="file" name="photo" />
+	                
+	            </span>
+			</div>
+			
+			<div ng-show="showProgress" id="progress" class="progress span9">
+			    <div class="bar" style="width: {{currentProgress}}%; height: 30px"></div>
+			</div>
+		</div>
+	</form>
+	
+	<hr />
+	
+	<form name="organizationSettingsForm" novalidate>
+		<div class="control-group">
+	    	<label class="control-label">{{'label_organization_name'|trad}}</label>
+    		
+    		<div class="controls">
+  				<input ng-blur ng-focus type="text" name="name" ng-model="organizationSettings.name"
+					placeholder="{{'label_organization_name'|trad}}"
+					required
+					ng-minlength="2"
+					ng-maxlength="50"
+					class="input-xlarge"
+				>
+	
+				<span class="clear"></span>
+	
+				<span class="text-error" ng-show="!nameshow && csValidate(formSent,organizationForm.name.$error.required,organizationForm.name.$pristine)">{{'error_organization_name_missing'|trad}}</span>
+				<span class="text-error" ng-show="!nameshow && csValidate(formSent,organizationForm.name.$error.minlength || organizationForm.name.$error.maxlength,organizationForm.name.$pristine)">{{'error_organization_name_size'|trad}}</span>
+			</div>
+	  	</div>
+	  	
+	  	<div class="control-group">
+	    	<label class="control-label">{{'label_website'|trad}}</label>
+    		
+    		<div class="controls">
+  				<input ng-blur ng-focus type="text" name="website" ng-model="organizationSettings.website"
+					placeholder="{{'label_website'|trad}}"
+					ng-pattern="/((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/"
+					class="input-xlarge"
+				>
+				<span class="clear"></span>
+					
+				<span class="text-error" ng-show="!websiteshow && csValidate(formSent,organizationForm.website.$error.pattern,organizationForm.website.$pristine)">{{'error_website_invalid'|trad}}</span>
+			</div>
+	  	</div>
+		
+		<hr/>
+		
+		<div class="control-group">
+	    	<label class="control-label">{{'label_description'|trad}}</label>
+    		
+    		<div class="controls">		    
+  				<div ng-blur ng-focus
+					rich-text-editor
+					name="description"
+					ng-model="organizationSettings.description"
+					placeholder="{{'label_description'|trad}}"
+					required
+					ng-minlength="10"
+					ng-maxlength="5000"
+				></div>
+	
+				<span class="clear"></span>
+	
+				<span class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,organizationForm.description.$error.required,organizationForm.description.$pristine)">{{'error_organization_description_missing'|trad}}</span>
+				<span  class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,organizationForm.description.$error.length || organizationForm.description.$error.length,organizationForm.description.$pristine)">{{'error_organization_description_size'|trad}}</span>
+			</div>
+		</div>
+		
+		<hr />
+		
+		<div class="control-group">
+	  		<label class="control-label">{{'label_address'|trad}}</label>
+	  		
+	  		<div class="controls controls-row">		
+	  			<geoloc-picker 
+					formated-address="formatedAddress" 
+					address-label="search"
+					my-address="true"
+					class="span11"
+				></geoloc-picker>
+	  		</div>			  		
+	  	</div>	
+
+		<hr />
+		
+		<div class="controls controls-row">
+			<label class="checkbox">
+				<input type="checkbox" name="asCommunity" checked="checked" ng-model="organizationSettings.asCommunity" />
+				{{'label_add_organization_community'|trad}}
+				<i class="icon-question-sign" popover data-trigger="hover" data-title="{{'label_information'|trad}}" data-content="{{'label_asCommunity_information'|trad}}"></i>
+			</label>
+		</div>
+		
+		<div class="form-actions">
+			<loader  data-classes="btn-primary btn" data-sending="sending" data-action="submit" data-label="label_update"></loader>
+		</div>	
+	</form>
+</div>

@@ -1,0 +1,27 @@
+<div class="modal-header" >
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  	<h3>{{'modal_cancel_event_title'|trad}}</h3>
+</div>
+
+<div class="modal-body">
+	<div class="alert alert-error">
+		{{'modal_cancel_event_content1'|trad}}
+	</div>
+	
+	<p>{{'modal_cancel_event_content2'|trad}}</p>
+  	
+  	<hr />
+  	
+  	<p>{{"modal_cancel_event_content3"|trad}}</p>
+  	  	
+  	<form class="margin-top">
+  		<div class="row-fluid">
+  			<textarea type="text" class="span12" ng-model="reason" placeholder="{{'label_why_cancel_event'|trad}}"></textarea>
+		</div>
+	</form>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-success" ng-click="dismiss()">{{'label_back'|trad}}</button>
+	<input type="submit" class="btn btn-danger cancellingEvent" data-loading-text="{{'label_loading'|trad}}" ng-click="confirmedCancelEvent(reason,hide)" value="{{'label_cancel_event'|trad}}"/>
+</div>

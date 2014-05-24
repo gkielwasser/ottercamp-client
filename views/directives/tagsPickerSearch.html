@@ -1,0 +1,10 @@
+<input ng-init="initTagsPicker()"
+	type="text"
+	placeholder="{{'label_what_event'|trad}}" 
+	ng-model="searchNav" 
+	ng-change="updateSearch(searchNav)"
+	bs-typeahead="getTags"
+	data-min-length="1" 
+	bt-clear
+	/>
+        		

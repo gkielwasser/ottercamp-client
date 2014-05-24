@@ -1,0 +1,87 @@
+<div administrate-participants class="margin-top margin-bottom" ng-init="initParticipations()">
+	<div ng-show="eventSettings.fullPrice > 0">
+		<div class="alert alert-info" ng-show="showRecoltedPrice && participantsList > 0" angular-html-bind="label_recolted"></div>		
+
+		<hr ng-show="showRecoltedPrice && participantsList > 0"/>
+	</div>
+
+	<div class="filter-participants-container" ng-cloack>
+		<div class="alert alert-info" ng-show="participantsList == 0">
+			{{"label_no_event_participations"|trad}}
+		</div>
+		<div class="btn-group row-fluid" ng-model="currentFilter" bs-buttons-radio>
+		    <button type="button" class="btn span2" value="" ng-show="countParticipants('') > 0">
+		    		{{'label_all'|trad}} 
+		    		<span class="badge badge">
+		    			{{countParticipants('')}}
+		    		</span>
+		    </button>
+		    <button type="button" class="btn span2" value="accepted_participation" ng-show="countParticipants('accepted_participation') > 0">
+		    	{{'label_accepted'|trad}}
+		    	<span class="badge badge-success">
+		    		{{countParticipants('accepted_participation')}}
+		    	</span>
+		    </button>
+		    <button type="button" class="btn span2" value="refused_participation" ng-show="countParticipants('refused_participation') > 0">
+		    	{{'label_refused'|trad}}
+		    	<span class="badge badge-important">
+		    		{{countParticipants('refused_participation')}}
+		    	</span>
+		    </button>
+		    <button type="button" class="btn span2" value="cancelled_participation" ng-show="countParticipants('cancelled_participation') > 0">
+		    	{{'label_cancelled'|trad}}
+		    	<span class="badge badge-success">
+		    		{{countParticipants('cancelled_participation')}}
+		    	</span>
+		    </button>
+		    <button type="button" class="btn span2" value="pending_participation" ng-show="countParticipants('pending_participation') > 0">
+		    	{{'label_pending'|trad}}
+		    	<span class="badge badge-warning">
+		    		{{countParticipants('pending_participation')}}
+		    	</span>
+		    </button>
+		    <button type="button" class="btn span4" value="pending_payment" ng-show="countParticipants('pending_payment') > 0">
+		    	{{'label_pending_payment'|trad}}
+		    	<span class="badge badge-success" >
+		    		{{countParticipants('pending_payment')}}
+		    	</span>
+		    </button>	
+		    <button type="button" class="btn span4" value="requested_participation" ng-show="countParticipants('requested_participation') > 0">
+		    	{{'label_requested_participation'|trad}}
+		    	<span class="badge badge-success" >
+		    		{{countParticipants('requested_participation')}}
+		    	</span>
+		    </button>		  		  
+		</div>
+	</div>
+	
+	<div class="filtered-participants margin-top">
+		<div ng-repeat="participation in (filteredParticipants = (participantsList | filter:filterParticipants))" class="margin-bottom block">	
+			<div class="padding border-bottom" ng-show="showButton(participation)">
+				
+				<div class="alert alert-warning pull-left" ng-show="participation.guests > 0">
+					<b>{{'label_with'|trad}} {{participation.guests}} {{'label_guests'|trad}}</b>
+				</div>
+				
+				<span class="pull-right" ng-hide="seeConfirmation(participation)">
+					<a class="btn btn-danger" ng-click="showConfirmation(participation, 'refuse')" ng-show="showButton(participation) && see('administrate-participants-refuse')">{{'label_refuse'|trad}}</a>	
+					<a class="btn btn-success" ng-click="showConfirmation(participation, 'accept')" ng-show="showButton(participation) && see('administrate-participants-accept')">{{'label_accept'|trad}}</a>
+				</span>
+				
+				<span class="pull-right" ng-show="seeConfirmation(participation)">
+					{{'label_definitive_information'|trad}}
+					
+					<a class="btn btn-warning" ng-click="hideConfirmation(participation)">{{'label_cancel'|trad}}</a>
+					<a class="btn btn-success" ng-click="confirmedAction(participation)">{{'label_validate'|trad}}</a>
+				</span>
+				
+				<span class="clear"></span>
+			</div>
+
+			<card data-type="users" data-resource="participation.member" data-format="medium"></card>
+
+		</div>
+	</div>
+</div>
+
+<img class="loader" ng-show="loading" src="assets/images/ajax-loader.gif">

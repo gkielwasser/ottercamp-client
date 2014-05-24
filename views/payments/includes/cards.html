@@ -1,0 +1,23 @@
+
+<div id="cards" class="span9 block margin-top" ng-init="initCards()">
+	<div class="header nav-header padding">{{'label_cards'|trad}}</div>
+	
+	<div ng-hide="loading">
+		<div class="padding margin-top">
+			<div class="alert alert-info">
+				{{'label_cards_information'|trad}}
+				
+				<p ng-bind-html-unsafe="'label_policies_consultation'|trad"></p>
+			</div>
+			
+			<hr />
+			
+			<div class="alert alert-success" ng-show="cards.length == 0">
+				{{'label_no_user_cards'|trad}}
+			</div>
+		</div>
+		
+		<table class="table table-striped" ng-hide="cards.length == 0"></table>
+	</div>	
+	<div class="span6 offset5 margin-top" ng-show="loading"><img class="intern-loader"  src="assets/images/ajax-loader.gif"></div>
+</div>

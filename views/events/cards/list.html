@@ -1,0 +1,32 @@
+<div id="{{resource.id}}">
+	<div class="row-fluid">
+		<div class="span1">
+			<div class="margin-left margin-top margin-bottom">
+				<img ng-src="{{resource.smallPhoto}}" />
+			</div>
+		</div>
+
+		<div class="span8">
+			<div class="margin-right margin-top margin-bottom">
+				<div class="px16"><a href="{{'#/events/' + resource.id + '/' + cleanUrl(resource.title)}}">{{resource.title}}</a></div>
+
+				<span class="px13">{{"label_by"|trad}}
+					<a href="#/users/{{resource.organizer.id}}">
+						{{resource.organizer.name}} {{resource.organizer.lastName}}
+					</a>
+				</span>
+			</div>
+		</div>
+		
+		<div class="padding span3">
+			<div ng-switch on="status"> 				
+   				<div ng-switch-when="true">
+   					<span class="label label-{{resource.cColor}} pull-right" tooltip data-title="{{resource.cDescription}}">{{resource.cLabel}}</span>
+   				</div>
+   				<div ng-switch-default>
+   					<price price="resource.fullPrice" class="pull-right"></price>
+   				</div>
+   			</div>
+		</div>
+	</div>
+</div>	

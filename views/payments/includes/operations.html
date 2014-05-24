@@ -1,0 +1,38 @@
+<div id="operations" class="span9 block margin-top" ng-init="initOperations()">
+	<div class="header nav-header padding">{{'label_operations'|trad}}</div>
+		
+	<div class="padding margin-top" ng-hide="loading">
+		<div class="alert alert-info">
+			<p>{{'label_operations_information'|trad}}</p>
+			
+			<p ng-bind-html-unsafe="'label_policies_consultation'|trad"></p>
+		</div>
+		
+		<hr />
+		
+		<div class="alert alert-success" ng-show="operations.length == 0">
+			{{'label_no_user_operations'|trad}}
+		</div>
+
+		<table class="table table-striped" ng-hide="operations.length == 0">		  		
+	  		<thead>
+	    		<tr>
+	      			<th>{{'label_type'|trad}}</th>
+	      			<th>{{'label_events'|trad}}</th>
+	     			<th>{{'label_date'|trad}}</th>
+	     			<th>{{'label_amount'|trad}}</th>
+	    		</tr>
+	  		</thead>
+	  		
+	  		<tbody>
+	    		<tr ng-repeat="operation in operations">
+	    			<td>{{operation.TransactionType}}</td>
+	    			<td>{{operation.event.title}}</td>
+	    			<td>{{[operation.CreationDate] |formatedDate}}</td>
+	    			<td>{{operation.Amount / 100}}€</td>
+	    		</tr>
+	    	</tbody>
+		</table>
+	</div>	
+	<div class="span5 offset5 margin-top" ng-show="loading"><img class="intern-loader"  src="assets/images/ajax-loader.gif"></div>
+</div>

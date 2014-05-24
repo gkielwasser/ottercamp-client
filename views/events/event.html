@@ -1,0 +1,32 @@
+<div id="event" class="block margin-top padding-bottom" fade ng-init="init()" ng-cloack>
+    <div class="row-fluid">
+    	<!-- Informations -->
+    	<ng-include  src="Config.templatesPublicURL+'events/includes/infos.html'"></ng-include>
+    	
+    	<div class="span9 padding-top padding-right">
+    		<div class="alert alert-{{getEventLabel(eventSettings.participation.currentStatus.abbreviation)}}" ng-show="role!='organizer' && eventSettings.participation && eventSettings.currentStatus.abbreviation != 'completed_event'">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				{{eventSettings.participation.currentStatus.description}}
+			</div>
+			
+			<div class="alert alert-{{getEventLabel(eventSettings.currentStatus.abbreviation)}}" ng-show="role=='organizer'">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				{{eventSettings.currentStatus.description}}
+			</div>
+			
+			<div class="alert alert-warning" ng-show="role != 'organizer' && ((!eventSettings.participation && eventSettings.currentStatus.abbreviation == 'full_event') ||(eventSettings.participation && eventSettings.currentStatus.abbreviation == 'completed_event') )">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				{{eventSettings.currentStatus.description}}
+			</div>
+			
+			<div class="alert alert-success" ng-show="role !='organizer' && !eventSettings.participation && eventSettings.currentStatus.abbreviation == 'completed_event'">
+				{{'label_event_statut_completed'|trad}}
+			</div>
+  
+    		<!-- Menu -->
+    		<ng-include  src="Config.templatesPublicURL+'events/includes/menu.html'"></ng-include>
+	    	
+	    	<div ui-view></div>
+	    </div>
+    </div>   
+</div>

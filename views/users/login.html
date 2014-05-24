@@ -1,0 +1,80 @@
+<div id="login" class="margin-top block" fade>
+	<div class="header nav-header padding">{{'label_login'|trad}}</div>
+	
+	<div class="padding">
+	    <div class="row-fluid">
+	    	<div class="span6 marketing">
+				<img src="assets/images/climbing.jpg" class="margin-bottom" />
+					
+				<p class="marketing-byline margin-top text-left">
+					Avez-vous déjà essayé des activités inhabituelles ?<br />
+					
+					<br />
+					
+					De nouvelles personnes à rencontrer, de nouveaux souvenirs à se créer. C'est l'occasion d'en profiter.
+				</p>
+			</div>
+			
+	    	<div class="span6 border-left padding-left">
+	    		<form class="form-vertical form-{{formSent}}" name="loginForm" novalidate>
+			    	<div class="padding margin-top">
+				    	<div class="control-group">				    	
+					    	<div class="controls">
+					    		<a class="btn-auth btn-facebook large FBlogining" href="javascript:;" 
+									data-loading-text="{{'label_loading'|trad}}"
+									ng-click="FBUser.login()">
+								    {{'label_facebook_login'|trad}}
+								</a>
+							</div>
+					  	</div>
+					  	
+					  	<div class="row-fluid margin-top margin-bottom padding-top padding-bottom">
+							<div class="span3">
+								<hr />
+							</div>
+							
+							<div class="span1 padding-top text-center">
+								<i>{{'label_or'|trad}}</i>
+							</div>
+							
+							<div class="span8">	
+								<hr />
+							</div>
+						</div>
+					  					    	
+				    	<div class="controls">
+				  			<input type="email" name="email" ng-model="myLoginForm.email" 
+				  				ng-blur ng-focus
+				  				placeholder="{{'label_email'|trad}}"
+				  				required
+				  				class="input-xlarge"
+				  			>
+				  			
+				  			<span class="clear"></span>
+				  			
+				  			<span class="text-error" ng-show="!emailshow && csValidate(formSent,loginForm.email.$error.required,loginForm.email.$pristine)">{{'error_member_email_missing'|trad}}</span>
+				    		<span class="text-error" ng-show="!emailshow && csValidate(formSent,loginForm.email.$error.email,loginForm.email.$pristine)">{{'error_member_email_invalid'|trad}}</span>			    	
+				    	</div>
+					  	
+				    	<div class="controls">
+				 			<input type="password" name="password" ng-model="password" 
+				 				ng-blur ng-focus
+				 				placeholder="{{'label_password'|trad}}"  
+				 				required
+				 				class="input-xlarge"
+				 			>
+				 			<span class="clear"></span>
+				 			<span class="text-error" ng-show="!passwordshow && csValidate(formSent,loginForm.password.$error.required,loginForm.password.$pristine)">{{'error_member_password_missing'|trad}}</span>
+				    	</div>
+				    </div>
+			    	
+			    	<div class="form-actions">
+			    		<loader data-sending="sending" data-action="submit" data-label="label_login"></loader>
+
+				    	<a href="#/forgottenPassword">{{'label_forgot_password'|trad}}</a>
+				    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

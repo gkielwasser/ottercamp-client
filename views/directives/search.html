@@ -1,0 +1,138 @@
+<!-- TODO Variables non traduites -->
+
+<form class="navbar-search" ng-init="initSearch()">
+	<div class="dropdown">
+  		<!--data-toggle="dropdown"   Active le clavier mais fais bugger la recherche tous les 2 caractères-->
+		<input type="search" placeholder="{{'label_search'|trad}}" 	
+			ng-disabled="isSearching" 
+	  		class="searchDir" 
+	  		on-enter="enterSearch()"
+	  		ng-model="search" 
+	  		ng-change="onChange()"
+	  		ng-click="showDropdown()"	  	
+	  	>
+		<a class='clear-text' ng-show="isVisible" style='cursor:pointer;color:#888;'><i class='icon-remove'></i></a>
+	  
+	  	<ul class="dropdown-menu" ng-show="search.length > 0" role="menu" aria-labelledby="dropdownMenu">
+	   		<!-- tests-->
+	   			{{getCase1()}}
+	   		
+	   		<!-- Tag dans Ville -->
+	   		<li ng-click="makeSearch('events',tags[0].value,cities[0])" 
+	   			ng-show="cities[0] &&  tags[0] && search.split(' ').length >= 2"
+	   		>
+	   			<a href="javascript:;">
+	   				1- Rechercher <b>{{tags[0].value}}</b> à proximité de <b>{{cities[0].label}}</b>
+	   			</a>
+	   		</li>
+
+	    	<li class="divider" ng-show="cities[0] &&  tags[0] && search.split(' ').length >= 2"></li>   
+	   
+			<!-- Tag dans Communauté -->
+		   	<li ng-click="makeSearch('events',tags[0].value,communities[0])" 
+		   		ng-show="tags[0] && communities[0] &&  communities[0] && search.split(' ').length >= 2"
+		   	>
+		   		<a href="javascript:;">
+		   			2- Rechercher <b>{{tags[0].value}}</b> dans la communauté <b>{{communities[0].name}}</b>
+		   		</a>
+		   	</li>
+	
+		   	<!-- Tag dans Organisation -->
+		   	<li ng-click="makeSearch('events',tags[0].value,organizations[0])" 
+		   		ng-show="tags[0] && organizations[0] &&  organizations[0] && search.split(' ').length >= 2"
+		   	>
+		   		<a href="javascript:;">
+		   			3- Rechercher <b>{{tags[0].value}}</b> dans l'organisations <b>{{organizations[0].name}}</b>
+		   		</a>
+		   	</li>
+	 
+		   	<!-- Ville dans Organisation TODO-->
+		   	<li ng-click="makeSearch('events',organizations[0].name,cities[0])"
+		   		ng-show="cities[0] &&  organizations[0] && search.split(' ').length >= 2"
+		   	>
+		   		<a href="javascript:;">
+		   			4- Rechercher à proximité de <b>{{cities[0].label}}</b> pour l'organisation <b>{{organizations[0].name}}</b>
+		   		</a>
+		   	</li>
+
+		   	<!-- Ville dans Communauté TODO -->
+		   	<li ng-click="makeSearch('events',communities[0].name,cities[0])" 
+		   		ng-show="cities[0] &&  communities[0] && search.split(' ').length >= 2"
+		   	>
+		   		<a href="javascript:;">
+		   			5- Rechercher à proximité de <b>{{cities[0].label}}</b> pour la communauté <b>{{communities[0].name}}</b>
+		   		</a>
+		   	</li>
+		   	
+		   	<!-- Tag dans les événements -->
+		   	<li ng-click="makeSearch('events',tag.value)" ng-repeat="tag in tags | limitTo:5">
+		   		<a href="javascript:;">
+		   			6- Rechercher <b>{{tag.value}}</b> dans les événements
+		   		</a>
+		   	</li>
+		    
+		   	<li class="divider" ng-show="tags.length > 0"></li>
+		    
+		   	<!-- Evénement dans une ville -->
+		   	<li ng-click="makeSearch('events',null,city);" ng-repeat="city in cities | limitTo:3">
+		   		<a href="javascript:;">
+		   			7- Rechercher un événement à <b>{{city.label}}</b>
+		   		</a>
+		   	</li>
+		    
+		  	<li class="divider" ng-show="cities.length > 0"></li>
+		    
+		   	<!-- Keyword 1 dans événements -->
+		   	<li ng-click="makeSearch('events',search.split(' ')[0],null)" 
+		   		ng-show="search.split(' ')[0] != tags[0].value"
+		   	>
+		   		<a href="javascript:;">
+		   			8- Rechercher <strong>{{search.split(" ")[0]}}</strong> dans les événements
+		   		</a>
+		   	</li>
+		   	
+		   	<!-- Keyword 2 dans événements -->
+		   	<li ng-click="makeSearch('events',search.split(' ')[1],null)" 
+		   		ng-show="search.split(' ').length == 2 && tags.length == 0 && search.split(' ')[0] != search.split(' ')[1]"
+		   	>
+		   		<a href="javascript:;">
+		   			9- Rechercher <strong>{{search.split(" ")[1]}}</strong> dans les événements
+		   		</a>
+		   	</li>
+		   	
+		   	<!-- Evénements -->
+		   	<li ng-click="makeSearch('events',search,null)" 
+		   		ng-show="search.split(' ').length > 1 && (tags[0] != search)"
+		   	>
+		   		<a href="javascript:;">
+		   			10- Rechercher <strong>{{search}}</strong> dans les événements
+		   		</a>
+		   	</li>
+		   	
+		   	<li class="divider" ng-show="(search.split(' ')[0] != tags[0].value) 
+		   		|| (search.split(' ').length == 2 && tags.length == 0 && search.split(' ')[0] != search.split(' ')[1])
+		   		|| (search.split(' ').length > 1)"></li>
+			
+			<!-- Organisations -->
+			<li ng-click="makeSearch('organizations')" >
+				<a href="javascript:;">
+					11- Rechercher <b>{{search}}</b> dans les organisations
+				</a>
+			</li>
+			
+			<!-- Communauté -->
+			<li ng-click="makeSearch('communities')" >
+				<a href="javascript:;">
+					12- Rechercher <b>{{search}}</b> dans les communautés
+				</a>
+			</li>
+							
+		    <!-- Utilisateurs -->
+		    <li ng-click="makeSearch('users')" >
+		    	<a href="javascript:;">
+		    		13- Rechercher <b>{{search}}</b> dans les utilisateurs
+		    	</a>
+		    </li>
+		</ul>
+	</div>
+</form>

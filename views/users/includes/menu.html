@@ -1,0 +1,23 @@
+<ul class="nav nav-tabs">
+	<li class="{{isPageActive('profile.general')}}">
+		<a href="#/users/{{userInfos.id}}">{{'label_profile'|trad}}</a>
+	</li>	
+	
+	<li ng-hide="anotherUser" class="{{isPageActive('profile.events')}}">
+		<a href="#/users/{{userInfos.id}}/events">{{'label_events'|trad}}</a>
+	</li>
+	
+	<li ng-hide="anotherUser" class="{{isPageActive('profile.communities')}}">
+		<a href="#/users/{{userInfos.id}}/communities">{{'label_communities'|trad}}</a>
+	</li>
+	
+	<li ng-hide="anotherUser" class="{{isPageActive('profile.comments')}}">
+		<a href="#/users/{{userInfos.id}}/comments">{{'label_comments'|trad}}</a>
+	</li>
+	
+	<li ng-hide="anotherUser" class="{{isPageActive('profile.photos')}}">
+		<a href="#/users/{{userInfos.id}}/photos">{{'label_photos'|trad}}</a>
+	</li>
+	
+	<span class="clear"></span>
+</ul>

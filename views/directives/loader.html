@@ -1,0 +1,10 @@
+<button class="{{loaderClass}} {{getClass()}}" ng-click="action()" ng-disabled="active">
+	<custom ng-switch on="sending">
+       	<custom ng-switch-when="true">
+			<i class="icon-refresh icon-spin icon-white"></i> {{'label_loading'|trad}}
+      	</custom>
+      	<custom ng-switch-default>
+      		{{label|trad}}	
+      	</custom>
+    </custom>
+</button>

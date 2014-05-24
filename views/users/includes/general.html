@@ -1,0 +1,89 @@
+<div class="row-fluid margin-top margin-bottom">
+	<div class="span8">
+		<div class="alert alert-success padding margin-bottom" ng-hide="anotherUser || userInfos.description">
+			<p>{{'label_no_user_description'|trad}}</p>
+			
+			<hr />
+			
+			<a href="#/settings" class="btn btn-success btn-block">{{'label_update_profile'|trad}}</a>
+		</div>
+		
+		<div class="alert alert-success padding margin-bottom" ng-hide="!anotherUser || userInfos.description">
+			{{'label_no_profile_description'|trad}}	
+		</div>
+				
+		<div class="block margin-bottom" ng-show="userInfos.description">
+			<div class="header nav-header padding">{{'label_description'|trad}}</div>
+			
+			<p class="padding margin-top text-justify" ng-bind-html-unsafe="userInfos.description"></p>
+		</div>
+		
+		<hr ng-show="userInfos.description"/>
+    	
+    	<div class="block" ng-show="similarUsers.length > 0">
+			<div class="header nav-header padding">{{'label_similar_users'|trad}}</div>
+			
+			<div class="row-fluid cell-content">
+				<div class="row-fluid">
+					<card 
+						ng-repeat="user in similarUsers"
+						class="span2" 
+						data-type="users" 
+						data-resource="user"
+						data-format="small"
+					></card>
+				</div>
+		   </div>
+		</div>
+    </div>
+    
+    <div class="span4">
+		<div class="block margin-bottom" ng-show="userInfos.talents.length > 0">
+			<div class="header nav-header padding">{{'label_talents'|trad}}</div>
+    		
+    		<div class="padding">
+	    		<div class="row-fluid">
+		    		<img ng-repeat="talent in userInfos.talents |limitTo:3" 
+		    			ng-src="{{talent.picture}}" 
+		    			class="span4" 
+		    			fade
+		    			tooltip
+		    			data-title="{{talent.label}}"
+		    		>
+	    		</div>
+	    	</div>
+		</div>
+				
+		<div class="block margin-bottom" ng-show="userInfos.hobbies.length > 0">
+			<div class="header nav-header padding">{{'label_hobbies'|trad}}</div>
+    		
+    		<div class="padding">
+	    		<div class="row-fluid">
+	    			<img ng-repeat="hobby in userInfos.hobbies  |limitTo:3" 
+		    			ng-src="{{hobby.picture}}" 
+		    			class="span4" 
+		    			fade
+		    			tooltip
+		    			data-title="{{hobby.label}}"
+		    		>
+	    		</div>
+	    	</div>
+    	</div>
+    	
+    	<div class="block margin-bottom" ng-show="userInfos.badges.length > 0">
+    		<div class="header nav-header padding">{{'label_badges'|trad}}</div>
+			
+			<div class="padding">
+				<div class="row-fluid cell-content">	    		
+			    	<img  ng-repeat="badge in userInfos.badges  |limitTo:6" 
+		    			ng-src="{{badge.picture}}" 
+		    			class="span2 img-circle hobby_small" 
+		    			fade
+		    			tooltip
+		    			data-title="{{badge.label}}"
+		    		>
+			   </div>
+			</div>
+    	</div>
+	</div>
+</div>

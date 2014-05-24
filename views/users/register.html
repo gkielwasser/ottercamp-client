@@ -1,0 +1,158 @@
+<div id="register" class="margin-top block" ng-init="FBUser.initFacebook()" fade>
+	<div class="header nav-header padding">{{'label_register'|trad}}</div>
+	
+	<!--<iframe src="http://www.facebook.com/plugins/facepile.php? 
+		app_id={125408324323674}" scrolling="no" frameborder="0" style="border:none;  
+		overflow:hidden; width:100%;" allowTransparency="true">
+	</iframe> -->
+	
+	<div class="padding">
+		<div class="row-fluid">
+			<div class="span6 marketing">
+				<img src="assets/images/cooking.jpg" class="margin-bottom" />
+					
+				<p class="marketing-byline margin-top text-left">
+					Grâce à Ottercamp, découvrez des activités de proximité avec des personnes proches de chez vous.<br />
+					
+					<br />
+					
+					Gérez l'organisation, partagez vos photos et amusez-vous. C'est gratuit, autant en profiter !
+				</p>
+			</div>
+			
+	    	<div class="span6 border-left padding-left">
+	    		<form class="form-vertical form-{{formSent}}" name="registerForm" novalidate>
+					<div class="padding margin-top">
+				    	<div class="controls">
+							<a class="btn-auth btn-facebook large FBlogining" href="javascript:;"
+								data-loading-text="{{'label_loading'|trad}}"
+								ng-click="FBUser.register()">
+							    {{'label_facebook_register'|trad}}
+							</a>
+						</div>
+					  						  						  	
+					  	<div class="row-fluid margin-top margin-bottom padding-top padding-bottom">
+							<div class="span3">
+								<hr />
+							</div>
+							
+							<div class="span1 padding-top text-center">
+								<i>{{'label_or'|trad}}</i>
+							</div>
+							
+							<div class="span8">	
+								<hr />
+							</div>
+						</div>
+						
+			    		<div class="controls">
+		      				<input type="text" name="login" ng-blur ng-focus
+		      					ng-model="myRegisterForm.login" 
+		      					placeholder="{{'label_username'|trad}}"
+		      					required 
+		      					ng-minlength="4" 
+		      					ng-maxlength="30"
+		      					ng-pattern="/^[a-zA-Z0-9 -.]/"
+		      					class="input-xlarge"
+		      				>
+			      			
+			      			<span class="clear"></span>
+			      			<span class="text-error" ng-show="!loginshow && csValidate(formSent,registerForm.login.$error.pattern,registerForm.login.$pristine)">{{'error_member_login_invalid'|trad}}</span>
+					      	<span class="text-error" ng-show="!loginshow && csValidate(formSent,registerForm.login.$error.required,registerForm.login.$pristine)">{{'error_member_login_missing'|trad}}</span>
+				    		<span class="text-error" ng-show="!loginshow && csValidate(formSent,registerForm.login.$error.minlength || registerForm.login.$error.maxlength,registerForm.login.$pristine)">{{'error_member_login_size'|trad}}</span>
+		    			</div>
+					  	
+			    		<div class="controls">
+		      				<input type="text" name="name" ng-model="myRegisterForm.name"
+		      					ng-blur ng-focus
+			      				placeholder="{{'label_name'|trad}}" 
+			      				required 
+			      				ng-minlength="2" 
+			      				ng-maxlength="50"
+			      				ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/"
+			      				class="input-xlarge"
+			      			>
+			      			
+			      			<span class="clear"></span>
+					      	<span class="text-error" ng-show="!nameshow && csValidate(formSent,registerForm.name.$error.pattern,registerForm.name.$pristine)">{{'error_member_name_invalid'|trad}}</span>			    		
+					      	<span class="text-error" ng-show="!nameshow && csValidate(formSent,registerForm.name.$error.required,registerForm.name.$pristine)">{{'error_member_name_missing'|trad}}</span>
+				    		<span class="text-error" ng-show="!nameshow && csValidate(formSent,registerForm.name.$error.minlength || registerForm.name.$error.maxlength,registerForm.name.$pristine)">{{'error_member_name_size'|trad}}</span>
+		    			</div>
+					  	
+			    		<div class="controls">
+		      				<input type="text" name="lastName" ng-model="myRegisterForm.lastName" 
+								ng-blur ng-focus
+			      				placeholder="{{'label_lastname'|trad}}" 
+			      				required 
+			      				ng-minlength="2" 
+			      				ng-maxlength="50"
+			      				ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/"
+			      				class="input-xlarge"
+		      				>
+			      			
+			      			<span class="clear"></span>
+					      	<span class="text-error" ng-show="!lastNameshow && csValidate(formSent,registerForm.lastName.$error.pattern,registerForm.lastName.$pristine)">{{'error_member_lastname_invalid'|trad}}</span>
+					      	<span class="text-error" ng-show="!lastNameshow && csValidate(formSent,registerForm.lastName.$error.required,registerForm.lastName.$pristine)">{{'error_member_lastname_missing'|trad}}</span>
+				    		<span class="text-error" ng-show="!lastNameshow && csValidate(formSent,registerForm.lastName.$error.minlength || registerForm.lastName.$error.maxlength,registerForm.lastName.$pristine)">{{'error_member_name_size'|trad}}</span>
+		    			</div>
+					  	
+						<div class="controls">
+				  			<input type="email" name="email" ng-model="myRegisterForm.email" 
+				  				ng-blur ng-focus
+				  				placeholder="{{'label_email'|trad}}" 
+				  				required
+				  				class="input-xlarge"
+				  			>
+					  		
+					  		<span class="clear"></span>
+					      	
+					      	<span class="text-error" ng-show="!emailshow && csValidate(formSent,registerForm.email.$error.required,registerForm.email.$pristine)">{{'error_member_email_missing'|trad}}</span>
+				    		<span class="text-error" ng-show="!emailshow && csValidate(formSent,registerForm.email.$error.email,registerForm.email.$pristine)">{{'error_member_email_invalid'|trad}}</span>
+					  	</div>
+	
+						<div class="controls">
+					  		<input type="password" name="password1" ng-model="password1" 
+					  			ng-blur ng-focus
+					  			placeholder="{{'label_password'|trad}}"
+					  			required 
+					  			ng-minlength="6"
+					  			ng-maxlength="100"
+					  			class="input-xlarge"
+					  		>
+					  		
+					  		<span class="clear"></span>
+					  		      	
+				    		<span class="text-error" ng-show="!password1show && csValidate(formSent,registerForm.password1.$error.required,registerForm.password1.$pristine)">{{'error_member_password_missing'|trad}}</span>
+				    		<span class="text-error" ng-show="!password1show && csValidate(formSent,registerForm.password1.$error.minlength || registerForm.password1.$error.maxlength,registerForm.password1.$pristine)">{{'error_member_password_size'|trad}}</span>
+					  	</div>
+	
+						<div class="controls">
+					  		<input type="password" name="password2" ng-model="password2" 
+					  			ng-blur ng-focus
+								password-validator2="password1"
+					  			placeholder="{{'label_password_confirmation'|trad}}"
+					  			class="input-xlarge"
+					  		>
+					  		
+					  		<span class="clear"></span>
+					  			      	
+				    		<span class="text-error" ng-show="!password2show && csValidate(formSent,registerForm.password2.$error.MATCH,registerForm.password2.$pristine)">{{'error_member_passwords_differents'|trad}}</span>
+						</div>
+											
+						<div class="controls margin-top">
+							<label class="checkbox">				
+								<input type="checkbox" value="J'accepte les CGU'" ng-model="acceptedCGU">
+								
+								<p ng-bind-html-unsafe="'label_policies_acceptation'|trad"></p>
+							</label>				
+						</div>
+					</div>
+					
+					<div class="form-actions">
+						<loader data-active="!acceptedCGU" data-sending="sending" data-action="submit" data-label="label_register"></loader>					 
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

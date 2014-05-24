@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs">
+	<li class="{{isPageActive('organization.general')}}">
+		<a href="#/organizations/{{organization.id}}">{{'label_information'|trad}}</a>
+	</li>	
+	
+	<li class="{{isPageActive('organization.administrators')}}" ng-show="see('organization.administrators')">
+		<a href="#/organizations/{{organization.id}}/administrators">{{'label_administrators'|trad}}</a>
+	</li>
+	
+	<li class="{{isPageActive('organization.settings')}}" ng-show="see('organization.settings')">
+		<a href="#/organizations/{{organization.id}}/settings">{{'label_settings'|trad}}</a>
+	</li>
+	<span class="clear"></span>
+</ul>

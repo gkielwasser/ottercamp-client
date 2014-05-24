@@ -1,0 +1,13 @@
+<div class="row-fluid">
+	<div class="tags tags-input span12" style="margin-left: 0;">
+		<div class="tag tag-input label label-info" ng-repeat="tag in tags">
+			{{tag}} <a ng-click="deleteTag(tag)"><i class="icon-remove icon-white"></i></a>
+		</div>
+	
+		<input id="tagInput" delete-on-select="true" placeholder="{{'label_tags'|trad}}" on-keydownpress-fn="addTag" class="listner input-xxlarge"  type="text" ng-model="newTag" bs-typeahead="typeahead">
+	</div>
+</div>
+
+<span class="clear"></span>
+
+<span class="text-error" ng-show="showTagsLimit">{{"error_member_tags_limit"|trad}}</span>

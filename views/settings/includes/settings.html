@@ -1,0 +1,184 @@
+<div id="settings" class="span9 block margin-top">		
+	<div class="header nav-header padding">{{'label_modify_profile'|trad}}</div>
+	
+	<div ng-hide="loading">
+	
+		<div class="margin-top padding">
+			<form class="form-horizontal">		
+				<div class="control-group">
+					<img ng-cloak ng-src="{{mySettingsForm.smallPhoto}}?{{d.getTime()}}" class="img-polaroid control-label" />
+	
+					<div class="controls controls-row">
+						<span class="btn btn-success fileinput-button span5">
+			                <i class="icon-plus icon-white"></i>
+			                <span>{{'label_upload_profile'|trad}}</span>
+			                <input file-upload cs-type="ParameterCtrl"  id="photo" type="file" name="photo" />
+			            </span>
+		
+						<div ng-show="showProgress" id="progress" class="progress span7">
+						    <div class="bar" style="width: {{currentProgress}}%; height: 30px"></div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="padding">
+			<hr />
+		</div>
+		
+		<!-- Formulaire Paramètres -->
+		<form class="form-horizontal form-{{formSent}}" name="settingsForm" novalidate>						
+			<div class="padding">
+				<!-- Prénom -->
+				<div class="control-group">
+			    	<label class="control-label">{{'label_name'|trad}}</label>
+		    		
+		    		<div class="controls">
+	      				<input type="text" ng-blur ng-focus name="name" ng-model="mySettingsForm.name"
+	      					placeholder="{{'label_name'|trad}}"
+	      					required 
+	      					ng-minlength="2" 
+	      					ng-maxlength="50"
+	      					ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/"
+	      					class="input-xlarge"
+	      				>
+	      				
+		      			<span class="clear"></span>
+		      			
+		      			<span class="text-error" ng-show="!nameshow && csValidate(formSent,settingsForm.name.$error.pattern,settingsForm.name.$pristine)">{{'error_member_name_invalid'|trad}}</span>	    				
+		      			<span class="text-error" ng-show="!nameshow && csValidate(formSent,settingsForm.name.$error.required,settingsForm.name.$pristine)">{{'error_member_name_missing'|trad}}</span>
+	    				<span class="text-error" ng-show="!nameshow && csValidate(formSent,settingsForm.name.$error.minlength || settingsForm.name.$error.maxlength,mySettingsForm.name.$pristine)">{{'error_member_name_size'|trad}}</span>
+	    			</div>
+			  	</div>
+			  	
+			  	<!-- Nom -->
+				<div class="control-group">
+			    	<label class="control-label">{{'label_lastname'|trad}}</label>
+		    		
+		    		<div class="controls">
+	      				<input type="text" ng-blur ng-focus name="lastname" ng-model="mySettingsForm.lastName" 
+	      					placeholder="{{'label_lastname'|trad}}"
+	      					required 
+	      					ng-minlength="2" 
+	      					ng-maxlength="50"
+	      					ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/"
+	      					class="input-xlarge"
+	      				>
+
+		      			<span class="clear"></span>
+		      			
+		      			<span class="text-error" ng-show="!lastnameshow && csValidate(formSent,settingsForm.lastname.$error.pattern,settingsForm.lastname.$pristine)">{{'error_member_lastname_invalid'|trad}}</span>		
+		      			<span class="text-error" ng-show="!lastnameshow && csValidate(formSent,settingsForm.lastname.$error.required,settingsForm.lastname.$pristine)">{{'error_member_lastname_missing'|trad}}</span>
+	    				<span class="text-error" ng-show="!lastnameshow && csValidate(formSent,settingsForm.lastname.$error.minlength || settingsForm.lastname.$error.maxlength,mySettingsForm.lastname.$pristine)">{{'error_member_lastname_size'|trad}}</span>
+	    			</div>
+			  	</div>
+			  	
+			  	<!-- Email -->
+			  	<div class="control-group">
+			    	<label class="control-label">{{'label_email'|trad}}</label>
+		    		
+		    		<div class="controls">
+	      				<input ng-blur ng-focus type="email" name="email" ng-model="mySettingsForm.email" 
+	      					placeholder="{{'label_email'|trad}}"
+	      					required
+	      					class="input-xlarge pop"
+	      					data-show="{{emailshow}}"
+	      					popover
+	      					data-trigger="hover" 
+	      					data-title="{{'label_information'|trad}}" 
+	      					data-content="{{'label_email_information'|trad}}"
+	      				>
+
+		      			<span class="clear"></span>
+		      			
+		      			<span class="text-error" ng-show="!emailshow && csValidate(formSent,settingsForm.email.$error.required,settingsForm.email.$pristine)">{{'error_member_email_missing'|trad}}</span>
+	    				<span class="text-error" ng-show="!emailshow && csValidate(formSent,settingsForm.email.$error.email,mySettingsForm.email.$pristine)">{{'error_member_email_invalid'|trad}}</span>
+	    			</div>			    			
+			  	</div>
+			  	
+			  	<!-- Téléphone -->
+			  	<div class="control-group">
+			    	<label class="control-label">{{'label_phone'|trad}}</label>
+		    		
+		    		<div class="controls">
+	      				<input type="text" ng-blur ng-focus name="phone" ng-model="mySettingsForm.phone"
+	      					placeholder="{{'label_phone'|trad}}"      					
+	      					ng-pattern="/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/"
+	      					class="input-xlarge pop"
+	      					data-show="{{phoneshow}}" 
+	      					popover
+	      					data-trigger="hover" 
+	      					data-title="{{'label_information'|trad}}" 
+	      					data-content="{{'label_phone_information'|trad}}" 
+	      				>
+		      				
+		      			<span class="clear"></span>
+		      			
+		      			<span class="text-error" ng-show="!phoneshow && csValidate(formSent,settingsForm.phone.$error.pattern,settingsForm.phone.$pristine)">{{'error_member_phone_invalid'|trad}}</span>
+	    			</div>
+			  	</div>
+			  	
+			  	<hr />
+			  	
+			  	<!-- Langue -->
+			  	<div class="control-group">
+			  		<label class="control-label">{{'label_language'|trad}}</label>	
+					
+					<div class="controls">
+					    <select name="language" class="input-xlarge" ng-model="mySettingsForm.language" ng-options="lang.code as lang.label for lang in languageList">
+					    	<option style="display:none" value="">{{'label_language'|trad}}</option>
+					    </select>
+					</div>    					
+			  	</div>
+			  	
+			  	<!-- Tranche d'âge -->
+			  	<div class="control-group">
+			  		<label class="control-label">{{'label_agebracket'|trad}}</label>	
+					
+					<div class="controls">
+					    <select name="ageBracket" class="input-xlarge" ng-model="mySettingsForm.ageBracket" ng-options="age.abbreviation as age.label for age in ageBracketList">
+					    	<option style="display:none" value="">{{'label_agebracket'|trad}}</option>
+					    </select>
+					</div>    
+			  	</div>
+	
+			  	<hr />
+			  	
+			  	<div class="control-group">
+			    	<label class="control-label">{{'label_description'|trad}}</label>
+		    		
+		    		<div class="controls">		    
+	      				<div ng-blur ng-focus
+	      					name="description"
+	      					ng-minlength="10" 
+	      					ng-maxlength="5000"
+	      					rich-text-editor
+	      					ng-model="mySettingsForm.description"
+	      				></div> 
+	      				<span class="clear"></span>
+	      				<span class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,settingsForm.description.$error.length || settingsForm.description.$error.length,settingsForm.description.$pristine)">{{'error_member_description.size'|trad}}</span>
+	    			</div>	    			
+			  	</div>
+			  	
+			  	
+			  	<hr />
+			  	
+			  	<div class="control-group">
+			  		<label class="control-label">{{'label_address'|trad}}</label>
+			  		<div class="controls">		
+			  			<geoloc-picker class="span12"
+		      				formated-address="formatedAddress"
+		      				address-label="search"
+			  			></geoloc-picker>
+			  		</div>			  		
+			  	</div>	
+			</div>
+								
+			<div class="form-actions">
+				<loader data-sending="sending" data-action="submit" data-label="label_update_profile"></loader>
+			</div>
+		</form>
+	</div>
+	<div class="span6 offset4 margin-top" ng-show="loading" ><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>	
+</div>

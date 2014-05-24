@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  
+  <h4>{{'label_invite_to'|trad}}</h4>
+</div>
+
+<div class="modal-body" ng-init="initNew()">
+	<div class="row-fluid">
+		<div class="span6 offset4" ng-show="loadingEvents"><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+	</div>
+	
+	<div ng-show="events.length == 0 && !loadingEvents">
+		<div class="alert alert-info">
+			{{'label_invitation_no_events'|trad}}
+		</div>
+		
+		<div class="row-fluid">
+			<a href="javascript:;" class="btn btn-success span6" >{{'label_discover'|trad}}</a>
+			<a href="#/addEvent" class="btn btn-success span6" >{{'label_organize'|trad}}</a>
+		</div>
+	</div>
+	
+	<div ng-show="!loadingEvents && (events.length > 0) && (events | filter:{available:true}).length == 0">
+		<div class="alert alert-info">
+			{{'label_invitation_no_events_guest'|trad}}
+		</div>
+		
+		<div class="row-fluid">
+			<a href="javascript:;" class="btn btn-success span6">{{'label_discover'|trad}}</a>
+			<a href="#/addEvent" class="btn btn-success span6">{{'label_organize'|trad}}</a>
+		</div>
+	</div>
+		
+	<form ng-show="(events | filter:{available:true}).length > 0">
+		<div ng-repeat="event in events | filter:{available:true}" class="row-fluid margin-bottom border-bottom padding-bottom">
+			<div class="span1 padding-top">
+				<input type="checkbox" name="" ng-checked="event.checked" ng-model="event.checked" value="{{event.id}}" />
+			</div>
+			
+			<card class="span11" data-type="events" data-format="list" data-resource="event"></card>
+		</div>
+	</form>
+</div>
+
+<div class="modal-footer">
+  	<button type="button" class="btn" ng-click="hide()">{{'label_close'|trad}}</button>
+	<input ng-disabled="!(events | filter:{checked:true}).length > 0" type="submit" ng-click="invite(hide);" class="btn btn-primary inviting" data-loading-text="{{'label_loading'|trad}}" value="{{'label_invite'|trad}}" />				    	
+</div>

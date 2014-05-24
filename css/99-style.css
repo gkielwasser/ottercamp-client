@@ -1,0 +1,392 @@
+.grey{
+	background-color : whiteSmoke;
+}
+
+.map-refresh{
+	background: url('../images/refresh.png') 1px 1px no-repeat;
+	cursor: pointer;
+	display: block;
+	z-index: 2;
+	height: 39px;
+	width: 38px;
+	top: 20px;
+	left: 50px;
+
+}
+
+.map-refresh-background{
+	height: 39px;
+	width: 38px;
+	top: 20px;
+	left: 50px;
+	position: absolute;
+	background-color: white;
+	z-index: 2;
+	border: 1px solid #BBB;
+	box-sizing: border-box;
+	
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.map-refresh-active{
+	display: inline-block;
+	-moz-animation: spin 1s infinite linear;
+	-o-animation: spin 1s infinite linear;
+	-webkit-animation: spin 1s infinite linear;
+	animation: spin 1s infinite linear;
+}
+
+
+i{
+	color: #3b3b3b;
+}
+
+i:hover{
+	text-decoration: none;
+}
+
+.icon-active{
+	color:#6ABFC3;
+}
+
+.icon-white{
+	color:white;
+}
+
+a:link i{text-decoration:none;}    /* unvisited link */
+a:visited i{text-decoration:none;} /* visited link */
+a:hover i{text-decoration:none;}   /* mouse over link */
+a:active i{text-decoration:none;}  /* selected link */
+
+/* Début Dropdown TEST*/
+/*
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+    margin-top: 0;
+}
+
+.navbar .sub-menu:before {
+    border-bottom: 7px solid transparent;
+    border-left: none;
+    border-right: 7px solid rgba(0, 0, 0, 0.2);
+    border-top: 7px solid transparent;
+    left: -7px;
+    top: 10px;
+}
+.navbar .sub-menu:after {
+    border-top: 6px solid transparent;
+    border-left: none;
+    border-right: 6px solid #fff;
+    border-bottom: 6px solid transparent;
+    left: 10px;
+    top: 11px;
+    left: -6px;
+}
+*/
+/* FIN DROPDOWN HOVER TEST*/
+
+.dropup-menu {
+    bottom: 100%;
+    top: auto !important;
+}
+
+/* position the arrow downwards, pointing to the menu */
+
+.navbar .dropup-menu:before {
+    border-bottom: none;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid rgba(0, 0, 0, 0.2);
+    left: 7px;
+    top: 100%;
+}
+
+.navbar .dropup-menu:after {
+    border-bottom: none;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #fff;
+    left: 10px;
+    top: 100%;
+    left: 6px;
+}
+
+/* point the caret up*/
+
+.up {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #000000;
+    border-top: none;
+}
+
+.icon-spin{
+	display: inline-block;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+
+
+#presentation{
+	position: absolute;
+	top: 40px;
+	right: 10px;
+	width: 40%;
+	right: 10px !important;
+	z-index: 50;
+	line-height: 22px;
+}
+
+.new-message{
+	color: #333;
+}
+
+.marketing h2 {
+	margin: 20px 0 10px;
+	font-family: "Itc";
+	font-size: 40px;
+	font-weight: 200;
+	line-height: 1;
+	letter-spacing: -1px;
+}
+
+/*
+#brand.animate{
+	animation-name: rotation;
+	-webkit-animation-name: rotation;
+	-moz-animation-name: rotation;
+	-o-animation-name: rotation;
+	animation-duration: 1s;
+	-webkit-animation-duration: 1s;
+	-moz-animation-duration: 1s;
+	-o-animation-duration: 1s;
+	animation-timing-function: linear;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
+	-o-animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
+	-o-animation-iteration-count: infinite;
+}
+@keyframes rotation{ 
+   from {transform:rotate(0deg);} to {transform:rotate(360deg);} 
+} 
+@-webkit-keyframes rotation{ 
+   from {-webkit-transform:rotate(0deg);} to {-webkit-transform:rotate(360deg);} 
+} 
+@-moz-keyframes rotation{ 
+   from {-moz-transform:rotate(0deg);} to {-moz-transform:rotate(360deg);} 
+} 
+@-o-keyframes rotation{ 
+   from {-o-transform:rotate(0deg);} to {-o-transform:rotate(360deg);} 
+} 
+*/
+/*.dropdown-container{
+	max-height:400px;
+	overflow: auto;
+}
+
+.conversation:hover {
+	background-color: #5CA4A8;
+	cursor: pointer;
+}
+
+#conversations .conversation.unread{
+	background-color: #F5A503;
+}
+
+.conversation:hover a {
+	color: white;
+}
+
+figure {
+	margin-bottom: 0;
+}
+
+.weather {
+	background-color: rgba(255, 255, 255, 0.8);
+	position: relative;
+	display: block;
+	z-index: 1;
+	font-size: 16px;
+}
+
+.map-loader {
+	padding-top: 20%;
+}
+
+.intern-loader {
+	width: 100px;
+}
+
+.ui-pnotify:hover {
+	cursor: pointer;
+}
+
+.ui-pnotify:hover .alert-error {
+	cursor: pointer;
+	color: #B94A3E;
+	background-color: #F2DED4;
+	border-color: #EED3CD;
+}
+
+.ui-pnotify:hover .alert-success {
+	cursor: pointer;
+	color: #46883D;
+	background-color: #DFF0CE;
+	border-color: #D6E9BC;
+}
+
+.ui-pnotify:hover .alert-info {
+	cursor: pointer;
+	color: #3A87A3;
+	background-color: #D9EDED;
+	border-color: #BCE8E7;
+}
+
+.dropdown-menu ::-webkit-scrollbar, #inbox ::-webkit-scrollbar {
+  width: 10px;
+  
+}
+.dropdown-menu ::-webkit-scrollbar-track, #inbox ::-webkit-scrollbar-track {
+  background: #FFF;
+}
+.dropdown-menu ::-webkit-scrollbar-thumb, #inbox ::-webkit-scrollbar-thumb {
+  background: #eee;
+}
+.dropdown-menu ::-webkit-scrollbar-thumb:hover, #inbox ::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+.dropdown-menu ::-webkit-scrollbar-thumb:active, #inbox ::-webkit-scrollbar-thumb:active {
+  background: #666;
+}*/
+
+/*.hover:hover {
+	cursor: pointer;
+}*/
+
+/*#inbox {
+	position: absolute;
+	bottom: 30px;
+	top: 41px;
+}
+
+#inbox .conversations { 
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	top: 41px;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+#inbox .messages {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	top: 41px;
+	overflow: hidden;
+	overflow-y: scroll;
+}*/
+
+.link {
+	display: block;
+	color: #333;
+}
+
+.link:hover {
+	text-decoration: none;
+	color: #333;
+	background-color: #5CA4A8;
+	cursor: pointer;
+}
+
+.link:hover a {
+	color: white;
+}
+
+.navbar #typo {
+    height: 40px;
+    padding: 5px;
+   	text-align: center;
+    overflow: visible;
+    display: block;
+	left: 50%;
+	position: absolute;
+}
+
+.background {
+	background-color: #eee;
+}
+
+.action:hover {
+	background-color: #dedede;
+}
+
+.price {
+	font-size: 14px;
+}
+
+.px12 {
+	font-size: 12px;
+}
+
+.px13 {
+	font-size: 13px;
+}
+
+.px14 {
+	font-size: 14px;
+}
+
+.px15 {
+	font-size: 15px;
+}
+
+.px16 {
+	font-size: 16px;
+}
+
+.marker-image {
+	width: 20px;
+	padding: 3px;
+	background-color: #FFF;
+	border: 1px solid #AAA;
+	border-radius: 5px;
+}
+
+.footer, .footer a {
+font-size: 12px;
+}

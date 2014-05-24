@@ -1,0 +1,99 @@
+<div class="modal-header" >
+	<h3>{{'modal_beneficiary_title'|trad}}</h3>
+</div>
+
+<form style="margin-bottom: 0;" name="bicInfosForm" novalidate ng-submit="submitBicInfos(hide,bicInfosForm, myBicInfosForm, formatedAddress, search)">
+	<div class="modal-body">
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			
+			<!-- Informations pour les organisations -->
+			<p ng-show="isOrganization" ng-bind-html-unsafe="'modal_beneficiary_content_organization'|trad"></p>
+			
+			<p ng-hide="isOrganization" ng-bind-html-unsafe="'modal_beneficiary_content'|trad"></p>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="controls controls-row">
+				<input type="text" name="name" ng-model="myBicInfosForm.name"
+					placeholder="{{'label_name'|trad}}"
+					required
+					ng-minlength="2"
+				    ng-maxlength="50"
+				    ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/"
+					ng-blur
+					ng-focus
+					class="span6"
+				/>
+							
+				<input ng-hide="isOrganization" type="text" name="lastName" ng-model="myBicInfosForm.lastName"
+					placeholder="{{'label_lastname'|trad}}"
+					ng-required="!isOrganization"
+					ng-minlength="2"
+				    ng-maxlength="50"
+				    ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/"
+					class="span6"
+					ng-blur
+					ng-focus
+				/>
+				
+				<span class="clear"></span>
+				
+				<span class="text-error" ng-show="!nameshow && csValidate(bicInfosSent,bicInfosForm.name.$error.pattern,bicInfosForm.name.$pristine)">{{'error_member_name_invalid'|trad}}</span>
+				<span class="text-error" ng-show="!nameshow && csValidate(bicInfosSent,bicInfosForm.name.$error.minlength || bicInfosForm.name.$error.maxlength,bicInfosForm.name.$pristine)">{{'error_member_name_size'|trad}}</span>			
+				<span class="text-error" ng-show="!nameshow && csValidate(bicInfosSent,bicInfosForm.name.$error.required,bicInfosForm.name.$pristine)">{{'error_member_name_missing'|trad}}</span>
+				
+				<span class="text-error" ng-show="!lastNameshow && csValidate(bicInfosSent,bicInfosForm.lastName.$error.pattern,bicInfosForm.lastName.$pristine)">{{'error_member_lastname_invalid'|trad}}</span>
+				<span class="text-error" ng-show="!lastNameshow && csValidate(bicInfosSent,bicInfosForm.lastName.$error.minlength || bicInfosForm.lastName.$error.maxlength,bicInfosForm.lastName.$pristine)">{{'error_member_lastname_size'|trad}}</span>
+				<span class="text-error" ng-show="!lastNameshow && csValidate(bicInfosSent,bicInfosForm.lastName.$error.required,bicInfosForm.lastName.$pristine)">{{'error_member_lastname_missing'|trad}}</span>		
+			</div>
+
+			<!-- Adresse -->
+		  	<div class="controls controls-row">	
+		  		<geoloc-picker 
+		  			formated-address="formatedAddress" 
+					address-label="search"
+					my-address="true"
+					class="span11">
+				</geoloc-picker>
+		  		<span class="clear"></span>
+		  		<span class="text-error" ng-show="bicInfosSent &&  !formatedAddress.lat">{{'error_address_missing'|trad}}</span>	
+			</div>
+		
+			<!-- Bic -->
+		  	<div class="controls controls-row">	
+		  		<input type="text" name="bic" ng-model="myBicInfosForm.bic"
+					placeholder="{{'label_bic'|trad}}"
+					required
+					ng-pattern="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" 
+					class="span12"
+					ng-blur
+					ng-focus
+				>
+				<span class="clear"></span>
+				<span class="text-error" ng-show="!bicshow && csValidate(bicInfosSent,bicInfosForm.bic.$error.required,bicInfosForm.bic.$pristine)">{{'error_beneficiary_bic_missing'|trad}}</span>
+				<span class="text-error" ng-show="!bicshow && csValidate(bicInfosSent,bicInfosForm.bic.$error.pattern,bicInfosForm.bic.$pristine)">{{'error_beneficiary_bic_invalid'|trad}}</span>			
+			</div>
+			
+			<!-- Iban -->
+		  	<div class="controls controls-row">	
+		  		<input type="text" name="iban" ng-model="myBicInfosForm.iban"
+					placeholder="{{'label_iban'|trad}}"
+					required
+					class="span12"
+					ng-blur
+					ng-focus
+				>
+				<span class="clear"></span>
+				<span class="text-error" ng-show="!ibanshow && csValidate(bicInfosSent,bicInfosForm.iban.$error.required,bicInfosForm.iban.$pristine)">{{'error_beneficiary_iban_invalid'|trad}}</span>
+				<span class="text-error" ng-show="!ibanshow && csValidate(bicInfosSent,bicInfosForm.iban.$error.pattern,bicInfosForm.iban.$pristine)">{{'error_beneficiary_iban_invalid'|trad}}</span>			
+			</div>
+		</div>
+	</div>
+		
+	<!-- Soumission du formulaire -->	  	
+	<div class="modal-footer">
+		<a class="btn btn-warning" ng-click="closeBicInfos(hide)">{{'label_back'|trad}}</a>
+	  	<input type="submit" class="btn btn-primary addingBicInfos" data-loading-text="{{'label_loading'|trad}}" value="{{'label_send'|trad}}"/>
+	</div>
+</form>

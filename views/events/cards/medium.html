@@ -1,0 +1,75 @@
+<div id="{{resource.id}}">
+	<div class="row-fluid header">
+		<div class="span2">
+			<div class="margin-left margin-top margin-bottom">
+				<a href="{{'#/events/' + resource.id + '/' + cleanUrl(resource.title)}}">
+					<img ng-src="{{resource.smallPhoto}}" tooltip data-title="{{resource.category.label}}" />
+				</a>
+			</div>
+		</div>
+
+		<div class="span8">
+			<div class="margin-right margin-top margin-bottom">
+				<div class="px16"><a href="{{'#/events/' + resource.id + '/' + cleanUrl(resource.title)}}">{{resource.title}}</a></div>
+
+				<span class="px13">{{"label_by"|trad}}
+					<a href="#/users/{{resource.organizer.id}}">
+						{{resource.organizer.name}} {{resource.organizer.lastName}}
+					</a>
+				</span>
+			</div>
+		</div>
+		
+		<div class="padding span2">
+			<div ng-switch on="status"> 				
+   				<div ng-switch-when="true">
+   					<span class="label label-{{resource.cColor}} pull-right" tooltip title="{{resource.cDescription}}">{{resource.cLabel}}</span>
+   				</div>
+   				<div ng-switch-default>
+   					<price price="resource.fullPrice" class="pull-right"></price>
+   				</div>
+   			</div>
+		</div>
+	</div>
+	    	
+	<div class="padding px13">
+    	<div>
+	    	<div>
+				<span class="add-on"><i class="icon-map-marker"></i></span>
+				<span>{{resource.address.label}}</span>
+			</div>
+			
+			<div>
+				<span class="add-on"><i class="icon-calendar"></i></span>
+				<span>{{[resource.startTimestamp,resource.endTimestamp] |formatedDate}}</span>
+			</div>
+    	</div>
+    	
+    	<div class="px12" ng-bind-html-unsafe="resource.description | noHtmlTags | truncate:140"></div>
+	</div>
+	
+	<div class="tags actions row-fluid">
+		<div class="span8 padding">
+			<span ng-repeat="tag in resource.tags" class="label label-info tag"><i class="icon-tag icon-white"></i>
+				<a ng-click="searchTag(resource.id,tag)" href="">{{tag}}</a>
+			</span>
+		</div>
+				
+		<div class="span4">
+			<div class="pull-right">
+				<a class="action padding pull-left hover" href="javascript:;" 
+					share 
+					description="resource.description" 
+					atitle="resource.title"  
+					url="Config.webURL + '#/events/' + resource.id + '/' + cleanUrl(resource.title)" 
+					tooltip 
+					data-title="{{'label_share'|trad}}"
+				><i class="icon-share"></i></a>
+			
+				<span class="clear"></span>
+			</div>
+			
+			<span class="clear"></span>
+		</div>
+	</div>
+</div>	

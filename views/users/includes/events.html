@@ -1,0 +1,40 @@
+<!-- TODO variables non traduites -->
+
+<div ng-show="!loading" ng-init="initAgenda()">
+	<div class="alert alert-success padding margin-bottom" ng-show="archivedEvents.length == 0 && nextEvents.length == 0 && importantEvents.length == 0">
+		<p>{{'label_no_user_events'|trad}}</p>
+		
+		<hr />
+		
+		<div class="row-fluid">
+			<div class="span6">
+				<a href="#/" class="btn btn-success btn-block">{{'label_discover'|trad}}</a>
+			</div>
+			<div class="span6">
+				<a href="#/addEvent" class="btn btn-success btn-block">{{'label_organize'|trad}}</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row-fluid" ng-hide="nextEvents.length == 0 && importantEvents.length == 0">
+		<div class="span6">
+			<div class="header border nav-header padding">{{"label_current"|trad}}</div>
+			
+			<card fade class="margin-top block" data-type="events" data-format="medium" data-resource="events" ng-repeat="events in nextEvents" status="true" ></card>
+		</div>
+		
+		<div class="span6">
+			<div class="header border nav-header padding">{{"label_urgent"|trad}}</div>
+			
+			<card fade class="margin-top block" data-type="events" data-format="medium" data-resource="events" ng-repeat="events in importantEvents" status="true"></card>
+		</div>
+	</div>
+		
+	<div ng-hide="archivedEvents.length == 0" class="margin-top">
+		<div class="header border nav-header padding">{{"label_archived"|trad}}</div>
+		
+		<card fade class="margin-top block" data-type="events" data-format="list" data-resource="events" ng-repeat="events in archivedEvents" status="true"></card>
+	</div>
+</div>	
+
+<div class="span6 offset4" ng-show="loading"><img class="intern-loader"  src="assets/images/ajax-loader.gif"></div>

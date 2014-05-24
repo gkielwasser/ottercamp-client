@@ -1,0 +1,64 @@
+<div class="margin-top margin-bottom" ng-init="initPhotos()" ng-hide="loading">
+	<div class="block" ng-show="see('add-photos')">
+		<div class="header nav-header padding">
+			<div class="pull-left">{{'label_photos'|trad}}</div>
+			
+			<span class="clear"></span>
+		</div>
+		
+		<div class="padding">
+			<form>	
+				<div class="controls-row">
+					<span class="btn btn-success fileinput-button span4 pull-left">
+		                <i class="icon-plus icon-white"></i>
+		                <span>{{'label_upload'|trad}}</span>
+		                <input file-upload type="file" cs-type="ShowEventCtrl" name="photo" multiple>
+		            </span>
+		           
+					<div ng-show="showProgress" id="progress" class="progress span8">
+					    <div class="bar" style="width: {{currentProgress}}%; height: 30px;"></div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+	
+	<hr ng-show="see('add-photos')"/>
+	<div ng-hide="photos.length > 0" class="alert alert-info">{{'label_no_event_photos'|trad}}</div>
+	<div id="gallery" ng-show="photos.length > 0" data-toggle="modal-gallery" data-target="#modal-gallery">
+		<div class="row-fluid">
+			<ul class="thumbnails">
+				<li class="span3" ng-repeat="photo in photos" fade>
+					<div class="box size11">
+						<a href="{{photo.mediumUrl+'?token='+ token}}" class="thumbnail" title="{{'label_by'|trad}} {{photo.member.fullName}}" data-gallery="gallery">
+							<img tooltip data-placement="top" style="display: block;" title="{{'label_by'|trad}} {{photo.member.fullName}}" ng-src="{{photo.smallUrl+'?token='+ token}}" fade />
+						</a>
+					</div>	
+				</li>
+			</ul>	
+		</div>
+	</div>
+</div>
+
+<div class="span6 offset4" ng-show="loading"><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+
+<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title"></h3>
+    </div>
+    
+    <div class="modal-body">
+    	<div class="modal-image"></div>
+    </div>
+    
+    <div class="modal-footer">
+        <!--<a class="btn btn-primary modal-next">Next <i class="icon-arrow-right icon-white"></i></a>
+        <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> Previous</a>
+        -->
+       <!-- <button id="toggle-fullscreen" ng-click="fullScreen()" class="btn btn-primary" data-toggle="button">Toggle Fullscreen</button>-->
+        <a class="btn btn-success modal-play modal-slideshow" ng-click="slideshow()" data-slideshow="5000"><i class="icon-play icon-white"></i>{{'label_slideshow'|trad}}</a>
+        <a class="btn modal-download" target="_blank"><i class="icon-download"></i>{{'label_download'|trad}}</a>
+    </div>
+</div>

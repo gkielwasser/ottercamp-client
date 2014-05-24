@@ -1,0 +1,11 @@
+<p class="alert alert-info" ng-show="eventsList.length == 0">{{'label_no_search_events'|trad}}</p>
+
+<div ng-hide="eventsList.length == 0" ng-cloack>
+	<div fade class="margin-top block" ng-repeat="event in eventsList" ng-click="centerMap(event.id)" ng-mouseenter="showMarker(event.id)" ng-mouseleave="hideMarker(event.id)">
+		<card		
+			data-resource="event"
+			data-type="events"
+			data-format="mini"
+		></card>
+	</div>	
+</div>

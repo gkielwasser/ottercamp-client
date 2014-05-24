@@ -1,0 +1,58 @@
+<div class="span3">
+	<div class="margin-left margin-top margin-bottom block" style="color: #333;">
+		<img ng-src="{{organization.mediumPhoto + '?' + d}}" width="100%" />
+		
+		<div class="padding border-top header">
+			<div class="row-fluid">
+				<div class="span9">
+		    		<h4>{{organization.name}}</h4>
+				</div>
+			</div>
+			
+			<div>
+				<div ng-show="organization.website">
+					<span class="add-on"><i class="icon-link"></i></span>
+		    		<a href="{{organization.website}}" target="_blank">{{organization.website}}</a>
+				</div>
+				
+				<div ng-show="organization.address.label">
+					<span class="add-on"><i class="icon-map-marker"></i></span>
+					<span>{{organization.address.label}}</span>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div class="pull-right">
+				<a class="action padding pull-left hover" href="javascript:;"
+					tooltip
+					embeded
+					data-id="organization.id"
+					data-type="o"
+					data-title="{{'label_embed'|trad}}"
+				><i class="icon-bookmark"></i></a>
+				
+				<a class="action padding pull-left hover" href="javascript:;" 
+					share 
+					description="organization.description" 
+					atitle="organization.title"  
+					url="Config.webURL + '#!/organizations/' + organization.id" 
+					tooltip 
+					data-title="{{'label_share'|trad}}"
+				><i class="icon-share"></i></a>
+				<custom ng-show="organization.asCommunity">	
+					<a class="action padding pull-left hover" 
+						follow 
+						community="organization"
+						tooltip
+						data-title="{{label|trad}}"
+					><i class="icon-star icon-{{followed}}"></i>
+					</a>	
+				</custom>
+				<span class="clear"></span>
+			</div>
+			
+			<span class="clear"></span>
+		</div>
+	</div>
+</div>

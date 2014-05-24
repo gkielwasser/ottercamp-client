@@ -1,0 +1,327 @@
+<style>
+	#preview-wrapper {
+	    overflow: hidden; 
+	    position: relative;
+	}
+	
+	#preview {
+	    position: absolute;
+	}
+	.select2-choice {
+	  max-height: 150px;
+	  overflow-y: auto;
+	}
+</style>
+
+<div id="add_event" class="block margin-top">
+	<div class="header nav-header padding">
+		{{'label_organize'|trad}}
+	</div>
+
+	<div class="margin-top">
+		<form name="addEventForm" novalidate>
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="padding-left">
+						<div class="row-fluid">
+
+							<div ng-switch on="photo" class="span4 block control-label">
+						       <div ng-switch-when="true" id="preview-wrapper">
+						       		<img id="preview" ng-cloak src="" />
+						       </div>
+						       
+						       <div ng-switch-default class="padding">
+						       		<img ng-cloak ng-src="{{getCategoryUrlByAbbr(myAddEventForm.category)}}" />
+						       </div>
+						    </div>
+							
+							<div class="span8">
+								<div class="alert alert-info" ng-hide="photo">
+									{{'label_event_photo_information'|trad}}
+								</div>
+								
+								<span class="btn btn-success fileinput-button">
+					                <i class="icon-plus icon-white"></i>
+					                <span>{{'label_upload_event'|trad}}</span>
+					                <input file-upload cs-type="AddEventCtrl" id="photo" type="file" name="photo" />
+					                
+					            </span>
+					            
+					            <hr ng-show="photo"/>
+					            
+					            <div ng-show="photo" class="alert alert-success">
+					            	<button type="button" class="close" ng-click="files=[];photo=false;">×</button>
+					            	{{files[0].name}}
+					            </div>
+							</div>
+						</div>
+						
+						<hr />
+						
+						<div class="controls controls-row margin-top">
+							<input ng-blur ng-focus type="text" name="title" ng-model="myAddEventForm.title"
+							placeholder="{{'label_title'|trad}}"
+							required
+							ng-minlength="2"
+							ng-maxlength="200"
+							class="span12"
+							>
+	
+							<span class="clear"></span>
+	
+							<span class="text-error" ng-show="!titleshow && csValidate(formSent,addEventForm.title.$error.required,addEventForm.title.$pristine)">{{'error_event_title_missing'|trad}}</span>
+							<span class="text-error" ng-show="!titleshow && csValidate(formSent,addEventForm.title.$error.minlength || addEventForm.title.$error.maxlength,addEventForm.title.$pristine)">{{'error_event_title_size'|trad}}</span>
+						</div>
+						
+						<!-- Catégorie -->
+						<div class="controls margin-top">
+							<div class="margin-bottom btn-group" name="category" ng-model="myAddEventForm.category" bs-buttons-radio required>
+								<button type="button" class="btn padding5 span1"
+								ng-repeat="cat in categoryList"
+								data-toggle="tooltip"
+								title="{{cat.label}}"
+								data-trigger="hover"
+								value="{{cat.abbreviation}}"
+								tooltip
+								container="body"
+								data-placement="bottom"
+								>
+	
+									<img ng-src="{{cat.picture}}" />
+								</button>
+	
+								<span class="clear"></span>
+							</div>
+	
+							<span class="clear"></span>
+	
+							<span class="text-error" ng-show="csValidate(formSent,addEventForm.category.$error.required,addEventForm.category.$pristine)">{{'error_event_category_missing'|trad}}</span>
+						</div>
+										
+						<hr />
+	
+						<!-- Description -->
+						<div class="controls controls-row">
+							<div ng-blur ng-focus
+							rich-text-editor
+							name="description"
+							ng-model="myAddEventForm.description"
+							placeholder="{{'label_description'|trad}}"
+							required
+							ng-minlength="10"
+							ng-maxlength="5000"
+							></div>
+	
+							<span class="clear"></span>
+	
+							<span class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,addEventForm.description.$error.required,addEventForm.description.$pristine)">{{'error_event_description_missing'|trad}}</span>
+							<span  class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,addEventForm.description.$error.length || addEventForm.description.$error.length,addEventForm.description.$pristine)">{{'error_event_description_size'|trad}}</span>
+						</div>
+	
+						<hr />
+	
+						<!-- Imperative -->
+						<div class="controls controls-row">
+							<textarea type="text" ng-blur ng-focus name="imperative" 
+			      				ng-model="myAddEventForm.imperative"
+			      				placeholder="{{'label_imperative'|trad}}"
+			      				rows="6" 
+			      				ng-minlength="10" 
+			      				ng-maxlength="5000"
+			      				class="span12"
+			      			></textarea>						
+	
+	 						<span class="clear"></span>
+	
+							<span  class="text-error" ng-show="!imperativeshow && csValidate(formSent,addEventForm.imperative.$error.minlength || addEventForm.imperative.$error.maxlength,addEventForm.imperative.$pristine)">{{'error_event_imperative_size'|trad}}</span>
+						</div>
+	
+						<!-- Liste de tags -->
+						<div class="controls controls-row">
+							<tags-picker tags="tags" class="span12"></tags-picker>
+						</div>
+						
+						<hr />
+	
+						<!-- Address -->
+						<div class="controls controls-row">
+							<geoloc-picker 
+								formated-address="formatedAddress" 
+								address-label="search"
+								my-address="true"
+								class="span12"
+							></geoloc-picker>
+	
+							<span class="clear"></span>
+							<span class="text-error" ng-show="formSent &&  !formatedAddress.lat">{{'error_address_missing'|trad}}</span>
+						</div>
+	
+						<hr />
+	
+						<!-- Date -->
+						<div class="controls controls-row">
+							<div class="input-append date form_datetime span6" style="margin-left: 0;">
+								<input name="startTimestamp" datetimepicker size="16" type="text" value="" readonly
+								ng-model="startTimestamp"
+								placement="top"
+								required
+								placeholder="{{'label_startdate'|trad}}"
+								class="hover"
+								ng-change="compareDates()"
+								>
+	
+								<span class="add-on btn"><i class="icon-remove"></i></span>
+								<span class="add-on btn"><i class="icon-calendar"></i></span>
+							</div>
+	
+							<div class="input-append date form_datetime span6 padding-left" style="margin-left: 0;">
+								<input ng-model="endTimestamp" datetimepicker size="16" type="text"
+								name="endTimestamp"
+								value=""
+								readonly
+								placement="top"
+								placeholder="{{'label_enddate'|trad}}"
+								class="hover"
+								ng-change="compareDates()"
+								>
+	
+								<span class="add-on btn"><i class="icon-remove"></i></span>
+								<span class="add-on btn"><i class="icon-calendar"></i></span>
+							</div>
+	
+							<span class="clear"></span>
+	
+							<span class="text-error" ng-show="csValidate(formSent,addEventForm.startTimestamp.$error.required,addEventForm.startTimestamp.$pristine)">{{'error_event_startTimestamp_missing'|trad}}</span>
+							<span class="text-error" ng-show="incorrectDates">{{'error_event_startTimestamp_superior'|trad}}</span>
+						</div>
+	
+						<hr />
+	
+						<!-- Participants -->
+						<div class="controls controls-row">
+							<div class="input-append span6" style="margin-left: 0;">
+								<input type="text" name="minParticipants" ng-model="myAddEventForm.minParticipants"
+								placeholder="{{'label_minparticipants'|trad}}"
+								placement="top"
+								min="2"
+								ng-change="compareParticipants('minParticipants')"
+								>
+	
+								<a class="add-on btn" ng-click="decParticipant('minParticipants')">-</a>
+								<a class="add-on btn" ng-click="incParticipant('minParticipants')">+</a>
+							</div>
+	
+							<div class="input-append span6 padding-left" style="margin-left: 0;">
+								<input type="text" name="maxParticipants" ng-model="myAddEventForm.maxParticipants"
+								placeholder="{{'label_maxparticipants'|trad}}"
+								placement="top"
+								min="2"
+								ng-change="compareParticipants('maxParticipants')"
+								>
+	
+								<a class="add-on btn" ng-click="decParticipant('maxParticipants')">-</a>
+								<a class="add-on btn" ng-click="incParticipant('maxParticipants')">+</a>
+							</div>
+	
+							<span class="clear"></span>
+	
+							<span class="text-error" ng-show="incorrectParticipants">{{'error_event_minParticipants_superior'|trad}}</span>
+						</div>
+	
+						<!-- Price -->
+						<div class="controls controls-row">
+							<div class="input-append span12">
+								<input type="text" name="price" ng-model="myAddEventForm.price"
+									ng-change="priceControl()"
+									placeholder="{{'label_htprice'|trad}}"
+									class="pricecontrol span10"
+								>
+	
+								<a class="btn" ng-click="decPrice()">-</a>
+								<a class="btn" ng-click="incPrice()">+</a>
+								<i class="icon-question-sign add-on" popover data-trigger="hover" data-title="{{'label_information'|trad}}" data-content="{{'label_htprice_information'|trad}}"></i>
+							</div>
+
+							<div ng-show="myAddEventForm.price">
+								<span  class="label label-success">
+									{{myAddEventForm.price|fullPrice|currency}} {{"label_with_ttc"|trad}}
+								</span>
+								
+								<i class="icon-question-sign" popover data-trigger="hover" data-title="{{'label_information'|trad}}" data-content="{{'label_ttcprice_information'|trad}}"></i>
+							</div>
+	
+							<span class="clear"></span>
+	
+							<span class="text-error" ng-show="incorrectPrice">{{"error_event_price_invalid"|trad}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="span6">
+					<div class="block margin-right">
+						<div class="header nav-header padding">{{'label_options'|trad}}</div>
+						
+						<div class="padding">
+							<!-- Organization -->
+							<div class="controls" ng-show="organizations.length > 0">
+								{{'label_organize_as'|trad}} <i class="icon-question-sign" popover data-trigger="hover" data-title="{{'label_information'|trad}}" data-content="{{'label_organize_as_information'|trad}}"></i>
+
+								<input data-searchbox="10" data-placeholder="<img width=31 class='padding5' src='{{user.smallPhoto}}'></img><strong>{{user.fullName}}</strong>" ui-select2="organizationsQuery" ng-model="myAddEventForm.organization" name="organization" data-format="true" style="width:100%" />
+							</div>
+							
+							<hr ng-show="organizations.length > 0" />
+							
+							<div class="controls">
+								<label class="checkbox">
+									<input type="checkbox" name="publicPhotos" checked="checked" ng-model="myAddEventForm.publicPhotos" />
+									{{'label_public_photos'|trad}}
+								</label>
+							</div>
+						
+							<div class="controls">
+								<label class="checkbox">
+									<input type="checkbox" name="automaticAcceptance" checked="checked" ng-model="myAddEventForm.automaticAcceptance" />
+									{{'label_automatic_acceptance'|trad}}
+								</label>
+							</div>
+							
+							<hr ng-show="communities.length > 0" />
+							
+							<!-- Communautés -->
+							<div class="controls" ng-show="communities.length > 0">
+								{{'label_organize_for'|trad}} <i class="icon-question-sign" popover data-trigger="hover" data-title="{{'label_information'|trad}}" data-content="{{'label_organize_for_information'|trad}}"></i>
+
+								<input data-searchbox="10" data-placeholder="{{'label_community_none'|trad}}" ui-select2="communitiesQuery" ng-model="myAddEventForm.community" name="community" data-format="true" style="width:100%" />	
+							</div>
+							
+							<hr />
+							
+							
+							
+							<!--<div class="controls">
+								<label class="checkbox">
+									<input type="checkbox" name="publicPhotos" checked="checked" ng-model="myAddEventForm.publicPhotos" />
+									Evenement privé (seulement les personnes que j'invite)
+								</label>
+							</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions">
+
+				<div class="pull-left">
+					<loader  data-sending="sending" data-action="submit" data-label="label_validate"></loader>
+				</div>
+						
+				<div ng-show="photo" class="pull-left padding5 text-info">
+			       {{'label_long_time_information'|trad}}
+		      	</div>
+
+				<span class="clear"></span>
+
+			</div>
+		</form>
+	</div>
+</div>

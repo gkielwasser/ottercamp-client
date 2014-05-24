@@ -1,0 +1,21 @@
+<div class="padding border-left" height="100%" ng-show="!loadingConversation" ng-init="initDetail()">
+	<div>
+		<h5>{{'label_conversation_with'|trad}} {{dest.fullName}}</h5>
+
+		<hr />
+		
+		<div id="{{message.id}}" scroll-if class="padding-top margin-bottom" ng-repeat="message in conversation">
+			<card data-resource="message" data-format="medium" data-type="messages"></card>
+		</div>
+	</div>
+	
+	<hr />
+	
+	<form class="row-fluid">		
+		<div class="controls controls-row margin-top">
+			<textarea class="span12" style="resize: none;" rows="4s" ng-model="message" placeholder="{{'label_message'|trad}}"></textarea>
+		</div>
+
+		<input type="submit" ng-disabled="!message || message.length < 2" ng-click="sendMessage(userId,message);message='';" class="btn btn-primary sendingMessage" data-loading-text="{{'label_loading'|trad}}" value="{{'label_respond'|trad}}" />
+	</form>
+</div>

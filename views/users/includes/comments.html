@@ -1,0 +1,14 @@
+<div class="row-fluid margin-top margin-bottom" ng-init="initUserComments()" ng-hide="loading">
+	<div class="alert alert-success padding margin-bottom" ng-show="userComments.length == 0">
+		<p>{{'label_no_user_comments'|trad}}</p>
+	</div>
+	
+	<div class="comment" ng-repeat="comment in userComments" fade>
+		<div class="row-fluid">
+		  	<card data-resource="comment" data-type="comments" data-format="large"></card>	
+		  	<hr/>	  		
+	  	</div>
+	</div>
+</div>
+
+<div class="span6 offset4" ng-show="loading" ><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>

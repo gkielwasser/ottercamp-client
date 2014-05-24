@@ -1,0 +1,28 @@
+<div id="notifications" class="block margin-top" ng-init="init()">		
+	<div class="header nav-header padding">{{'label_my_notifications'|trad}}</div>
+	
+	<div class="padding margin-top " ng-hide="loading">
+		<p ng-show="notifications.length == 0">
+			{{'label_no_user_notifications'|trad}}
+		</p>
+		<div class="row-fluid">
+			<div class="span7">
+				<strong>{{'label_content'|trad}}</strong>
+			</div>
+			<div class="span3">
+				<strong>{{'label_date'|trad}}</strong>
+			</div>
+			<div class="span2">
+				<strong>{{'label_link'|trad}}</strong>
+			</div>
+		</div>
+
+			<div ng-repeat="notification in notifications" class="row-fluid padding-top padding-bottom" ng-class="{'grey':$index%2 == 0}"> 
+				<card data-type="notifications" data-format="line" data-resource="notification"></card>
+			</div>	
+
+	</div>
+	
+	<div class="offset5" ng-show="loading"><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+
+</div>

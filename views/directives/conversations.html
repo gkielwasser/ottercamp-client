@@ -1,0 +1,26 @@
+<ul class="nav" role="button" ng-init="initInbox()" ng-cloak>	
+	<li class="dropdown">
+		<a role="button" class="dropdown-toggle {{countUnreaded()}} hover" 
+			tooltip 
+			data-placement="bottom" 
+			title="{{'label_my_conversations' | trad}}" 
+			data-toggle="dropdown" 
+			style="display: inline-block;" 
+			ng-click="read()"
+		>
+			{{unReaded}} <i class="icon-envelope"></i>
+		</a>
+	
+		<div class="dropdown-menu notifications pull-right padding-top" role="menu" aria-labelledby="navbar-user">	
+			<div class="text-center margin-bottom" ng-show="messages.length == 0">{{'label_no_user_messages'|trad}}</div>
+			
+			<div class="dropdown-container">
+				<div ng-click="seeConversation(message.conversation.id)" ng-hide="messages.length == 0" class="padding text-left border-top link" ng-repeat="message in messages">
+					<card data-resource="message" data-type="messages" data-format="small"></card>
+				</div>
+			</div>
+						
+			<div class="text-center border-top padding-top"><a href="#/conversations/">{{'label_show_all'|trad}}</a></div>
+		</div>
+	</li>
+</ul>

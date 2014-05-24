@@ -1,0 +1,16 @@
+<div id="tagsDir" class="controls"> 
+	<span class="tags"> 
+		<span class="tag" ng-repeat="tag in tags">
+			{{tag}} 
+			<a ng-click="deleteTag(tag)">
+				<i class="icon-remove"></i>
+			</a> 
+		</span> 
+		<input id="tagInput" type="text"  
+			ng-model="newTag" 
+			placeholder="Tags" 
+			class="input-small"
+			on-keydownpress-fn="addTag"
+		> 
+	</span> 
+</div>

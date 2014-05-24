@@ -1,0 +1,15 @@
+<div class="modal-header" >
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+ 	<h3 ng-show="type == 'o'">{{'modal_embed_title_organization'|trad}}</h3>
+ 	<h3 ng-show="type == 'e'">{{'modal_embed_title_event'|trad}}</h3>
+</div>
+
+<div class="modal-body" >
+	<div class="row-fluid">
+		<textarea ng-model="content" class="span12" style="resize: none;" rows="4"></textarea>
+  	</div>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-info" ng-click="dismiss()">{{'label_close'|trad}}</button>
+</div>

@@ -1,0 +1,41 @@
+<div id="{{resource.id}}" class="user medium">
+	<div>
+		<div class="padding">
+			<div class="row-fluid">
+				<div class="span2">
+					<a href="#/users/{{resource.id}}">
+						<img ng-src="{{resource.smallPhoto}}" />
+					</a>
+				</div>
+				
+				<div class="span9">
+					<a href="#/users/{{resource.id}}">{{resource.fullName}}</a> <small ng-show="resource.login">({{resource.login}})</small>
+					
+					<div ng-show="{{resource.address.shortLabel}}">
+						<span class="add-on"><i class="icon-map-marker"></i></span>
+						<span>{{resource.address.shortLabel}}</span>
+					</div>
+					
+					<div class="px12">
+						{{resource.description | noHtmlTags | truncate:140}}
+					</div>
+				</div>
+				
+				<div class="span1">
+					<span tooltip title="{{'label_karma_information'|trad}}" class="label label-success padding5 label pull-right">{{resource.karma}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="border-top background">
+		<div class="pull-right">						
+			<a class="action padding pull-left hover" ng-show="available()" invite user="resource" ng-click="show()" tooltip title="{{'label_invite_to'|trad}}"><i class="icon-plus"></i></a>
+			<a class="action padding pull-left hover" ng-show="available()" message user="resource" ng-click="show()" tooltip title="{{'label_send_message'|trad}}"><i class="icon-envelope"></i></a>
+		
+			<span class="clear"></span>
+		</div>
+		
+		<span class="clear"></span>
+	</div>
+</div>

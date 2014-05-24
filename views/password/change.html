@@ -1,0 +1,59 @@
+<div id="change" class="row-fluid" ng-init="init()">
+	<div class="span9 block margin-top">
+		<div class="header nav-header padding">{{'label_change_password'|trad}}</div>
+			
+		<form class="form-horizontal" name="passwordForm" novalidate ng-submit="submitChangePassword()">					
+			<div class="padding margin-top">
+				<div class="control-group" ng-hide="raz">
+					<div class="controls">
+		  				<input type="password" name="old" ng-model="old" 
+		  					placeholder="{{'label_password_old'|trad}}"
+		  					ng-required="!raz"
+		  					ng-blur ng-focus
+		  					class="input-xlarge"
+		  				>
+		  				<span class="clear"></span>
+		  				<span class="text-error" ng-show="!oldshow && csValidate(formSent,passwordForm.old.$error.required,passwordForm.old.$pristine)">{{'error_member_password_missing'|trad}}</span>
+					</div>
+				</div>
+				
+			  	<div class="control-group">
+			  		<div class="controls">
+		  				<input type="password" name="password1" ng-model="password1" 
+		  					placeholder="{{'label_password_new'|trad}}"
+		  					required
+		  					ng-minlength="6"
+				  			ng-maxlength="100"
+				  			ng-blur ng-focus
+				  			class="input-xlarge"
+		  				>
+		  				<span class="clear"></span>
+		  				
+		  				<span class="text-error" ng-show="!password1show && csValidate(formSent,passwordForm.password1.$error.required,passwordForm.password1.$pristine)">{{'error_member_password_missing'|trad}}</span>
+				    	<span class="text-error" ng-show="!password1show && csValidate(formSent,passwordForm.password1.$error.minlength || passwordForm.password1.$error.maxlength,passwordForm.password1.$pristine)">{{'error_member_password_size'|trad}}</span>
+					</div>
+				</div>
+				
+				<!-- Mot de passe 2 -->
+				<div class="control-group">
+					<div class="controls">
+				  		<input type="password" name="password2" ng-model="password2" 
+				  			placeholder="{{'label_password_confirmation'|trad}}"	  			   
+				  			password-validator="password1"
+				  			ng-blur ng-focus
+				  			class="input-xlarge"
+				  		>
+				  		<span class="clear"></span>
+				  		<span class="text-error" ng-show="!password2show && csValidate(formSent,passwordForm.password2.$error.MATCH,passwordForm.password2.$pristine)">{{'error_member_passwords_differents'|trad}}</span>						
+					</div>
+				</div>				
+			</div>
+			
+			<div class="form-actions">
+				<input type="submit" class="btn btn-primary changing" data-loading-text="{{'label_loading'|trad}}" value="{{'label_update'|trad}}"/>
+			</div>
+		</form>
+	</div>
+	
+	<ng-include src="Config.templatesPublicURL+'settings/includes/menu.html'" class="span3 margin-top"></ng-include>	
+</div>		

@@ -1,0 +1,15 @@
+<ng-include src="Config.templatesPublicURL+'discover/modal.html'"></ng-include>
+
+<div class="row" ng-init="initMapCtrl()" >		
+	<div id="map" ng-hide="loading" map-box>
+		<a href="" tooltip data-title="{{'label_search_map_center'|trad}}" data-placement="right" class="map-refresh-background" ng-click="conditionalRefresh()"><i  class="map-refresh" ng-class="{'map-refresh-active':refresh}"></i></a>
+	</div>
+	<div class="offset8 map-loader" ng-show="loading"><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+</div>
+
+<div id="discover">
+	<!-- Events list -->
+	<event-list ng-hide="waiting"></event-list>
+</div>
+
+	 

@@ -1,0 +1,22 @@
+<div class="btn-group" ng-init="initGeolocDir()">
+	<div class="input-append">
+	  <input ng-change="resetCity()" 
+			placeholder="{{'label_city'|trad}}" 
+			class="span2" 
+			data-items="4" 
+			data-min-length="3" 
+			type="text" 
+			ng-model="typeaheadValue" 
+			bs-typeahead="typeaheadFn"
+			ng-disabled="disablePicker"
+			ng-hide="disablePicker"
+		>
+
+		<div class="btn-group" bs-buttons-radio ng-model="geoloc">
+			<button type="button" class="btn" value="city" tooltip data-placement="bottom" title="{{'label_search_city'|trad}}"><i class="icon-list"></i></button>
+		  	<button type="button" class="btn" value="near" tooltip data-placement="bottom" title="{{'label_search_my_position'|trad}}"><i class="icon-map-marker"></i></button>
+		  	<button type="button" class="btn" value="center" tooltip data-placement="bottom" title="{{'label_search_map_center'|trad}}"><i class="icon-certificate"></i></button>
+		  	<button type="button" class="btn" value="home" tooltip data-placement="bottom" title="{{'label_search_my_address'|trad}}" ng-show="showUserGeoloc"><i class="icon-home"></i></button>
+		</div>
+	</div>
+</div>

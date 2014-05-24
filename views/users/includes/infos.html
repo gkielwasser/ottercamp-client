@@ -1,0 +1,40 @@
+<div class="span3">
+	<div class="margin-left margin-top margin-bottom block" style="color: #333;">
+		<img ng-src="{{userInfos.mediumPhoto}}" width="100%" />
+		
+		<div class="padding border-top header">
+			<div class="row-fluid">
+				<div class="span9">
+		    		<h4>{{userInfos.fullName}}</h4>
+		    		<h5>{{userInfos.login}}</h5>
+				</div>
+				<div class="span3">
+					<span tooltip title="{{'label_karma_information'|trad}}" class="label label-success label margin-top padding pull-right">{{userInfos.karma}}</span>
+				</div>
+			</div>
+			
+			<div>
+				<div ng-show="userInfos.ageBracket.label">
+					<span class="add-on"><i class="icon-user"></i></span>
+					<span>{{userInfos.ageBracket.label}}</span>
+				</div>
+				<div ng-show="userInfos.address.label">
+					<span class="add-on"><i class="icon-map-marker"></i></span>
+					<span>{{userInfos.address.shortLabel}}</span>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div class="pull-right">
+				<a class="action padding pull-left hover" ng-hide="anotherUser" href="#/settings" tooltip title="{{'label_update_profile'|trad}}"><i class="icon-edit"></i></a>
+				<a class="action padding pull-left hover" ng-show="available()" invite user="userInfos" ng-click="show()" tooltip title="{{'label_invite_to'|trad}}"><i class="icon-plus"></i></a>
+				<a class="action padding pull-left hover" ng-show="available()" message user="userInfos" ng-click="show()" tooltip title="{{'label_send_message'|trad}}"><i class="icon-envelope"></i></a>
+			
+				<span class="clear"></span>
+			</div>
+			
+			<span class="clear"></span>
+		</div>
+	</div>
+</div>

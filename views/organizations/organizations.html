@@ -1,0 +1,13 @@
+<div id="organization" class="block margin-top padding-bottom" fade ng-init="initOrganization()">
+	<div class="row-fluid">
+    	<!-- Informations -->
+    	<ng-include  src="Config.templatesPublicURL+'organizations/includes/infos.html'"></ng-include>
+    	
+    	<div class="span9 margin-top padding-right">
+		    <!-- Menu -->
+    		<ng-include  src="Config.templatesPublicURL+'organizations/includes/menu.html'"></ng-include>
+    		
+		    <div ui-view></div>
+	    </div>
+	</div>		    
+</div>

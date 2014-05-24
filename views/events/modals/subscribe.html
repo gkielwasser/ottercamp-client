@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  
+  <h4>{{'label_create_alert'|trad}}</h4>
+</div>
+
+<div class="modal-body" style="overflow: visible;">
+	<form >
+		<div ng-show="noAddress">
+			<div class="alert alert-info">
+				{{'label_tags_no_address_information'|trad}}
+			</div>
+			
+			<geoloc-picker formated-address="formatedAddress" address-label="search" my-address="false"></geoloc-picker>
+			<span class="text-error" ng-show="formSent && !formatedAddress.lat">{{'error_address_missing'|trad}}</span>
+			<span class="clear"></span>
+			
+			
+		</div>
+		<div class="controls controls-row"  ng-hide="noAddress">
+			<div class="alert alert-info">
+				{{'label_alerts_information'|trad}}
+			</div>
+			
+            <tags-picker tags="tags"></tags-picker>
+        </div>
+	</form>
+</div>
+
+<div class="modal-footer">
+  	<button type="button" class="btn" ng-click="hide()">{{'label_close'|trad}}</button>
+  	<input ng-show="noAddress" type="submit" ng-click="saveAddress(formatedAddress);" class="btn btn-success addressing" data-loading-text="{{'label_loading'|trad}}" value="{{'label_update_profile'|trad}}" />	
+	<input ng-hide="noAddress" type="submit" ng-click="subscribe(hide);" class="btn btn-primary subscribing" data-loading-text="{{'label_loading'|trad}}" value="{{'label_create'|trad}}" />				    	
+</div>

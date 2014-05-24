@@ -1,0 +1,123 @@
+<div class="margin-top margin-bottom" ng-init="initSettings()">
+	
+	<!-- Form photo -->
+	<form>
+		<div class="row-fluid">
+			<div class="span3">
+				<span class="btn btn-success fileinput-button">
+	                <i class="icon-plus icon-white"></i>
+	                <span>{{'label_upload_event_modify'|trad}}</span>
+	                <input file-upload cs-type="EventsSettingsCtrl" id="photo" type="file" name="photo" />
+	                
+	            </span>
+			</div>
+			
+			<div ng-show="showProgress" id="progress" class="progress span9">
+			    <div class="bar" style="width: {{currentProgress}}%; height: 30px"></div>
+			</div>
+		</div>
+	</form>
+	
+	<hr />
+	
+	<form name="eventSettingsForm" novalidate>
+		<div class="control-group">
+	    	<label class="control-label">{{'label_title'|trad}}</label>
+    		
+    		<div class="controls">
+  				<input ng-blur ng-focus type="text" name="title" ng-model="myEventSettingsForm.title"
+					placeholder="{{'label_title'|trad}}"
+					required
+					ng-minlength="2"
+					ng-maxlength="200"
+					class="input-xxlarge"
+				>
+	
+				<span class="clear"></span>
+	
+				<span class="text-error" ng-show="!titleshow && csValidate(formSent,eventSettingsForm.title.$error.required,eventSettingsForm.title.$pristine)">{{'error_event_title_missing'|trad}}</span>
+				<span class="text-error" ng-show="!titleshow && csValidate(formSent,eventSettingsForm.title.$error.minlength || eventSettingsForm.title.$error.maxlength,eventSettingsForm.title.$pristine)">{{'error_event_title_size'|trad}}</span>
+			</div>
+	  	</div>
+		
+		<hr/>
+		
+		<div class="control-group">
+	    	<label class="control-label">{{'label_description'|trad}}</label>
+    		
+    		<div class="controls">		    
+				<div ng-blur ng-focus
+					rich-text-editor
+					name="description"
+					ng-model="myEventSettingsForm.description"
+					placeholder="{{'label_description'|trad}}"
+					required
+					ng-minlength="10"
+					ng-maxlength="5000"
+				></div>
+	
+				<span class="clear"></span>
+	
+				<span class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,eventSettingsForm.description.$error.required,eventSettingsForm.description.$pristine)">{{'error_event_description_missing'|trad}}</span>
+				<span  class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,eventSettingsForm.description.$error.length || eventSettingsForm.description.$error.length,eventSettingsForm.description.$pristine)">{{'error_event_description_size'|trad}}</span>
+			</div>
+		</div>		
+		
+		<!-- Participants -->
+		<p ng-show="participantsList && (countParticipants() > 0)" angular-html-bind="label_event_settings_participants_number" class="alert alert-info"></p>
+		<div class="controls controls-row" ng-show="participantsList">
+			<div class="input-append span6" style="margin-left: 0;">
+				<input type="text" name="minParticipants" ng-model="myEventSettingsForm.minParticipants"
+				placeholder="{{'label_minparticipants'|trad}}"
+				placement="top"
+				min="{{$parent.countParticipants() +3}}"
+				ng-change="compareParticipants('minParticipants')"
+				>
+			
+				<a class="add-on btn" ng-click="decParticipant('minParticipants')">-</a>
+				<a class="add-on btn" ng-click="incParticipant('minParticipants')">+</a>
+			</div>
+		
+			<div class="input-append span6 padding-left" style="margin-left: 0;">
+				<input type="text" name="maxParticipants" ng-model="myEventSettingsForm.maxParticipants"
+				placeholder="{{'label_maxparticipants'|trad}}"
+				placement="top"
+				min="2"
+				ng-change="compareParticipants('maxParticipants')"
+				>
+
+				<a class="add-on btn" ng-click="decParticipant('maxParticipants')">-</a>
+				<a class="add-on btn" ng-click="incParticipant('maxParticipants')">+</a>
+			</div>
+
+			<span class="clear"></span>
+
+			<span class="text-error" ng-show="incorrectParticipants">{{'error_event_minParticipants_superior'|trad}}</span>
+			<br ng-show="incorrectParticipants"/>
+			
+			<span class="text-error" ng-show="incorrectMaxParticipants">{{'error_event_incorrect_max_participants'|trad}}</span>
+			<br/>
+			<span class="text-error" ng-show="incorrectMinParticipants">{{'error_event_incorrect_min_participants'|trad}}</span>
+		</div>
+		
+		<hr />
+
+		<div class="controls controls-row">
+			<label class="checkbox">
+				<input type="checkbox" name="publicPhotos" checked="checked" ng-model="myEventSettingsForm.publicPhotos" />
+				{{'label_public_photos'|trad}}
+			</label>
+		</div>
+		
+		<div class="controls controls-row">
+			<label class="checkbox">
+				<input type="checkbox" name="automaticAcceptance" checked="checked" ng-model="myEventSettingsForm.automaticAcceptance" />
+				{{'label_automatic_acceptance'|trad}}
+			</label>
+		</div>
+		
+		<div class="form-actions">
+			<loader data-classes="btn-primary btn" data-sending="sending" data-action="submit" data-label="label_update"></loader>
+		</div>		
+	</form>
+</div>

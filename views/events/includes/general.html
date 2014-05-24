@@ -1,0 +1,142 @@
+<!-- TODO variables non traduites -->
+<div class="span8" ng-init="initGeneral()">
+	<div class="block">
+		<div id="smap"  map-box-small style="min-height: 300px">
+
+			<div class="weather margin-right margin-top padding pull-right" ng-show="showWeather" fade>
+				<canvas id="weatherIcon" width="64" height="64"></canvas>
+				
+				<div class="margin-top text-center">
+					{{temperature}}°C
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="block margin-top">
+		<div class="nav-header header padding">
+			{{'label_description'|trad}}
+		</div>
+
+		<p class="padding text-justify" ng-bind-html-unsafe="eventSettings.description"></p>
+
+		<hr ng-show="{{eventSettings.description}}" />
+
+		<p class="padding">
+			{{eventSettings.imperative}}
+		</p>
+	</div>
+
+	<div class="block margin-top">
+		<div class="nav-header header padding">
+			{{formatParticipant()}} {{'label_participants'|trad}}
+		</div>
+
+		<div class="row-fluid" ng-show="see('participants-hovercard')" >
+			<!-- affiche l'organisateur de l'événément -->
+			<card class="span2" data-resource="eventSettings.organizer" data-type="users" data-format="small"></card>
+			
+			<card class="span2"
+				data-type="users" 
+				data-format="small" 
+				data-resource="participation.member" 
+				ng-repeat="participation in (acceptedParticipant = (participantsList|filter:filterParticipantsList))">
+			</card>
+			
+			<div class="span2 padding " ng-show="getAllGuests() > 0">
+				<b>+ {{getAllGuests()}} {{"label_guests" | trad}}</b>
+			</div>
+		</div>
+	</div>
+	
+	<hr ng-show="see('comments')" />
+	
+	<div ng-show="see('comments')">
+		<form class="row-fluid">
+			<div class="controls controls-row">
+				<div class="input-append input-prepend span12">
+					<textarea name="comment" class="span12" rows="3" style="resize: none;" ng-model="newComment" placeholder="{{'label_add_comment'|trad}}"></textarea>
+
+					<button class="btn btn-info" ng-disabled="!newComment || newComment.length < 2" type="button" ng-click="addComment(newComment);newComment = ''">
+						{{'label_send'|trad}}
+					</button>
+				</div>
+			</div>
+		</form>
+
+		<card class="comment margin-bottom" data-resource="comment" data-type="comments" data-format="medium" ng-repeat="comment in commentsList" fade></card>
+
+	</div>
+</div>
+
+<div class="span4">
+	<div class="block" ng-show="see('participate-block')">
+		<div class="nav-header header padding">
+			<div ng-switch on="eventSettings.participation.guests > 0">
+				<span ng-switch-when="true">{{'label_participate'|trad}} ({{'label_with'|trad}} {{eventSettings.participation.guests}} {{'label_guests'|trad}})</span>
+				<span ng-switch-when="false">{{'label_participate'|trad}}</span>
+			</div>
+		</div>
+
+		<div class="padding">
+			<div class="padding-top text-center">
+				<price price="eventSettings.fullPrice"></price>
+
+				<italic ng-show="eventSettings.participation.guests > 0 && eventSettings.fullPrice" class="price" style="font-size: 12px">
+					({{'label_by_person'|trad}})
+				</italic>
+			</div>
+
+			<hr/>
+
+			<div>
+				<input type="button" class="btn btn-success btn-large btn-block" ng-show="see('participate')" ng-click="confirmationParticipation()" value="{{'label_participate'|trad}}"/>
+				<input type="button" class="btn btn-success btn-large btn-block" ng-show="see('participate-requested')" ng-click="confirmationParticipation()" value="{{'label_participate'|trad}}"/>
+				<input type="button" class="btn btn-success btn-large btn-block" ng-show="see('participate-invited')" ng-click="confirmationParticipation()" value="{{'label_participate_invited'|trad}}"/>
+				
+				
+				<button type="button" class="btn btn-danger btn btn-block" ng-show="see('cancel')"  ng-click="confirmationCancelEvent()">
+					{{'label_cancel_event'|trad}}
+				</button>
+				<button type="button" class="btn btn-warning btn-large btn-block" ng-show="see('pay')" ng-click="confirmationPayment()">
+					{{'label_pay_participation'|trad}}
+				</button>
+				<button type="button" class="btn btn-danger btn btn-block" ng-show="see('cancelParticipant')" ng-click="confirmationCancelParticipant()">
+					{{'label_cancel_participation'|trad}}
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="block " ng-class="{'margin-top': see('participate-block')}">
+		<div class="nav-header header padding">{{'label_organizer'|trad}}</div>
+		
+		<div ng-hide="eventSettings.organization">
+			<card data-resource="eventSettings.organizer" data-type="users" data-format="medium"></card>
+		</div>
+		
+		<div ng-show="eventSettings.organization">
+			<card data-resource="eventSettings.organization" data-type="organizations" data-format="medium"></card>
+		</div>
+	</div>
+		
+	<div class="block margin-top" ng-show="similarEvents.length > 0">
+		<div class="nav-header header padding">{{'label_similar_events'|trad}}</div>
+		
+		<div class="padding">
+			<div class="row-fluid">
+	       		<custom ng-repeat="event in similarEvents">
+					<custom ng-switch on="$index % 2">
+		            	<custom ng-switch-when="0">
+			                <div class="row-fluid" ng-hide="similarEvents.length == 0">
+			                    <div ng-show="similarEvents[$index+0]" class="span4" ><card fade data-type="events" data-format="small" data-resource="similarEvents[$index+0]"></card></div>
+			                    <div ng-show="similarEvents[$index+1]" class="span4" ><card fade data-type="events" data-format="small" data-resource="similarEvents[$index+1]"></card></div>
+			                    <div ng-show="similarEvents[$index+2]" class="span4" ><card fade data-type="events" data-format="small" data-resource="similarEvents[$index+2]"></card></div>
+			                </div>
+			            </custom>
+			        </custom>
+				</custom>			
+			</div>
+	   </div>
+	</div>
+</div>

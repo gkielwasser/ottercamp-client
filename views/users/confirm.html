@@ -1,0 +1,17 @@
+<div ng-hide="loading" id="confirmation" class="block margin-top" fade ng-show="confirmed">
+	<div class="header nav-header padding">{{'page_confirmation_title'|trad}}</div>
+	
+	<div class="padding margin-top">
+		<p ng-bind-html-unsafe="'page_confirmation_content'|trad"></p>
+		
+		<hr />
+		
+		<div class="row-fluid">
+			<a href="#/settings" class="btn btn-success span4">{{'label_update_profile'|trad}}</a>
+			<a href="#/" class="btn btn-success span4">{{'label_discover'|trad}}</a>
+			<a href="#/addEvent" class="btn btn-success span4">{{'label_organize'|trad}}</a>
+		</div>
+	</div>
+</div>
+
+<img class="loader" ng-show="loading" src="assets/images/ajax-loader.gif">

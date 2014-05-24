@@ -1,0 +1,66 @@
+<div class="span3">
+	<div class="margin-left margin-top margin-bottom block" style="color: #333;">
+		<img ng-src="{{eventSettings.mediumPhoto + '?' + d}}" width="100%" />
+	
+		<div class="padding border-top header">
+			<h4>{{eventSettings.title}}</h4>
+	
+			<div>
+				<div>
+					<span class="add-on"><i class="icon-flag"></i></span>
+					<span>{{eventSettings.category.label}}</span>
+				</div>
+	    		<div>
+					<span class="add-on"><i class="icon-map-marker"></i></span>
+					<span>{{eventSettings.address.label}}</span>
+				</div>
+				<div>
+					<span class="add-on"><i class="icon-calendar"></i></span>
+					<span>{{[eventSettings.startTimestamp, eventSettings.endTimestamp] |formatedDate}}</span>
+				</div>	
+				<!--<div>
+					<span class="add-on"><i class="icon-user icon-white"></i></span>
+					<span>{{eventSettings.ageBracket.label}}</span>
+				</div>-->
+	    		
+	    		<hr ng-show="eventSettings.tags" />
+	    		
+	    		<p class="tags">
+					<span ng-repeat="tag in eventSettings.tags" class="label label-info tag"><i class="icon-tag icon-white"></i> <a href="" ng-click="$emit('searchTag',{tag:tag})">{{tag}}</a></span>
+				</p>
+			</div>
+		</div>
+		
+		<div class>
+			<div class="pull-right">
+				<!--<a class="action padding pull-left hover" href="javascript:;" tooltip title="{{'label_clone'|trad}}"><i class="icon-retweet"></i></a>-->
+				
+				<a class="action padding pull-left hover" href="javascript:;"
+					tooltip
+					embeded
+					data-id="eventSettings.id"
+					data-type="e"
+					data-title="{{'label_embed'|trad}}"
+				><i class="icon-bookmark"></i></a>
+				
+				<a class="action padding pull-left hover" share tooltip title="{{'label_share'|trad}}"><i class="icon-share"></i></a>
+			
+				<span class="clear"></span>
+			</div>
+			
+			<span class="clear"></span>
+		</div>
+	</div>
+	
+	<div class="margin-left block padding" ng-show="eventSettings.community">
+		<div class="row-fluid">
+			<div class="span2">
+				<a href="#/organizations/{{eventSettings.community.id}}"><img ng-src="{{eventSettings.community.smallPhoto}}" /></a>
+			</div>
+			
+			<div class="span10">
+				{{'label_organized_for'|trad}} <a href="#/organizations/{{eventSettings.community.id}}">{{eventSettings.community.name}}</a>
+			</div>
+		</div>
+	</div>
+</div>

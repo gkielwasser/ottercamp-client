@@ -1,0 +1,36 @@
+<div class="span9 margin-top" ng-init="initCommunities()">
+	<div class="block">
+		<div class="header nav-header padding">{{'label_my_communities'|trad}}</div>
+		
+		<div class="margin-top padding">
+			<div ng-show="!communities || communities.length == 0" class="alert alert-info">
+				{{'label_no_communities_information'|trad}}
+			</div>
+			
+			<div ng-show="communities.length > 0" class="row-fluid">
+				<custom ng-repeat="community in communities">
+					<custom ng-switch on="$index % 2">
+		            	<custom ng-switch-when="0">
+			                <div class="row-fluid" ng-hide="userList.length == 0">							    
+			                    <div ng-show="communities[$index+0]" class="block span6 margin-top" >
+			                    	<card					
+										data-format="medium" 
+										data-type="organizations" 
+										data-resource="communities[$index+0]">
+									</card>
+			                    </div>
+			                    <div ng-show="communities[$index+1]" class="block span6 margin-top" >
+			                    	<card				
+										data-format="medium" 
+										data-type="organizations" 
+										data-resource="communities[$index+1]">
+									</card>
+			                    </div>
+			                </div>
+			            </custom>
+			        </custom>
+				</custom>
+			</div>
+		</div>
+	</div>
+</div>

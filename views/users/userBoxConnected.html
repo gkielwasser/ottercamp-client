@@ -1,0 +1,27 @@
+<inbox></inbox>
+<notifications></notifications>	
+
+<div class="nav" role="menu">
+	<div class="btn-group noSelection">
+		<a id="navbar-user" class="btn dropdown-toggle" data-toggle="dropdown" ng-click="hideAlert()">
+			{{user.name}} <b class="caret"></b>
+		</a>
+		
+		<ul class="dropdown-menu pull-right">	
+			<li ng-click="$emit('changePage','infos')"><a href="#/users/{{user.id}}">{{'label_my_profile'|trad}}</a></li>
+			<li><a href="#/conversations/">{{'label_my_conversations'|trad}}</a></li>
+
+			<li class="divider"></li>
+			
+			<li><a href="#/payments/operations">{{'label_my_operations'|trad}}</a></li>
+			<li><a href="#/organizations">{{'label_my_organizations'|trad}}</a></li>
+			
+			<li class="divider"></li>
+
+			<li><a href="#/settings">{{'label_settings'|trad}}</a></li>
+			<li><a ng-click="logout()" href="#/">{{'label_logout'|trad}}</a></li>
+		</ul>
+	</div>
+	  	
+	<a tooltip data-placement="bottom" title="{{'label_organize'|trad}}" href="#/addEvent" class="btn btn-success"><i class="icon-plus"></i></a>
+</div>

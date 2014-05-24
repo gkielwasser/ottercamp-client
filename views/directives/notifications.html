@@ -1,0 +1,34 @@
+<ul class="nav" role="button" ng-init="initNotifications()" ng-cloak>	
+	<li class="dropdown">
+		<a role="button" class="dropdown-toggle {{countUnreaded()}} hover" 
+			tooltip 
+			data-placement="bottom" 
+			title="{{'label_my_notifications' | trad}}" 
+			data-toggle="dropdown" 
+			style="display: inline-block;" 
+			ng-click="read()"
+		>
+			{{unReaded}} <i class="icon-globe"></i>
+		</a>
+	
+		<div class="dropdown-menu notifications pull-right padding-top" role="menu" aria-labelledby="navbar-user">	
+			<div class="text-center margin-bottom" ng-show="notifications.length == 0">{{'label_no_user_notifications'|trad}}</div>
+			
+			<div class="dropdown-container margin-top">
+				<card data-resource="notification" data-type="notifications" data-format="small" class="padding border-top link" ng-repeat="notification in notifications"></card>
+				<!--
+				<a href="{{notification.link}}" >
+					<div class="text-right">
+						<small>{{[notification.timestamp] |formatedDate}}</small>
+					</div>
+					<div>
+						{{notification.content}}
+					</div>
+				</a>	
+				-->
+			</div>
+						
+			<div class="text-center border-top padding-top"><a href="#/notifications">{{'label_historic'|trad}}</a></div>
+		</div>
+	</li>
+</ul>

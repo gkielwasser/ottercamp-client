@@ -1,0 +1,40 @@
+<div id="beneficiaries" class="span9 block margin-top" ng-init="initBeneficiaries()">
+	<div class="header nav-header padding">{{'label_beneficiaries'|trad}}</div>
+
+	<div class="padding margin-top" ng-hide="loading">
+		<div class="alert alert-info">
+			{{'label_beneficiaries_information'|trad}}
+			
+			<p ng-bind-html-unsafe="'label_policies_consultation'|trad"></p>
+		</div>
+		
+		<hr />
+		
+		<div class="alert alert-success" ng-show="beneficiaries.length == 0">
+			{{'label_no_user_beneficiaries'|trad}}
+		</div>
+		
+		<table class="table table-striped" ng-hide="beneficiaries.length == 0">		  		
+	  		<thead>
+	    		<tr>
+	      			<th>{{'label_owner'|trad}}</th>
+	      			<th>{{'label_address'|trad}}</th>
+	     			<th>{{'label_iban'|trad}}</th>
+	     			<th>{{'label_bic'|trad}}</th>
+	    		</tr>
+	  		</thead>
+	  		
+	  		{{beneficiary.ID}} {{beneficiary.Tag}} {{beneficiary.CreationDate}} 
+		
+	  		<tbody>
+	    		<tr ng-repeat="beneficiary in beneficiaries">
+	    			<td>{{beneficiary.BankAccountOwnerName}}</td>
+	    			<td>{{beneficiary.BankAccountOwnerAddress}}</td>
+	    			<td>{{beneficiary.BankAccountIBAN}}</td>
+	    			<td>{{beneficiary.BankAccountBIC}}</td>
+	    		</tr>
+	    	</tbody>
+		</table>
+	</div>
+	<div class="span6 offset5 margin-top" ng-show="loading" ><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+</div>

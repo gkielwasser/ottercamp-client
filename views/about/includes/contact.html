@@ -1,0 +1,96 @@
+<div class="span9 block margin-top">
+	<div class="header nav-header padding">{{'label_contact'|trad}}</div>
+	
+	<div class="margin-top">		
+		<p class="padding">
+			{{"label_contact_information"|trad}}
+		</p>
+		
+		<hr />
+		
+		<form name="contactForm" class="form-{{formSent}}" novalidate ng-submit="submitMessage()">
+			<div class="padding">
+				<div class="controls controls-row">
+			    	<input type="text" name="name"
+			    		ng-blur ng-focus 
+		  				ng-model="myContactForm.name"
+		  				ng-minlength="2" 
+		      			ng-maxlength="50"
+		      			ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/" 
+		  				required
+		  				placeholder="{{'label_name'|trad}}"
+		  				class="span3"
+		  			>
+				  	
+			    	<input type="text" name="lastName" 
+			    		ng-blur ng-focus
+			    		ng-minlength="2" 
+		      			ng-maxlength="50"
+		      			ng-pattern="/^[a-zA-ZÀ-ÿ0-9 -]+$/"
+		  				ng-model="myContactForm.lastName" 
+		  				required
+		  				placeholder="{{'label_lastname'|trad}}"
+		  				class="span3"
+		  			>
+		  			<span class="clear"></span>
+		  			
+		  			<span class="text-error" ng-show="!lastNameshow && csValidate(formSent,contactForm.lastName.$error.minlength || contactForm.lastName.$error.maxlength,contactForm.lastName.$pristine)">{{'error_member_lastname_size'|trad}}</span> 			
+		  			<span class="text-error" ng-show="!lastNameshow && csValidate(formSent,contactForm.lastName.$error.required,contactForm.lastName.$pristine)">{{'error_member_lastname_missing'|trad}}</span>
+		  			<span class="text-error" ng-show="!lastNameshow && csValidate(formSent,contactForm.lastName.$error.pattern,contactForm.lastName.$pristine)">{{'error_member_lastname_invalid'|trad}}</span>
+		  			
+		  			<span class="text-error" ng-show="!nameshow && csValidate(formSent,contactForm.name.$error.pattern,contactForm.name.$pristine)">{{'error_member_name_invalid'|trad}}</span>
+		  			<span class="text-error" ng-show="!nameshow && csValidate(formSent,contactForm.name.$error.required,contactForm.name.$pristine)">{{'error_member_name_missing'|trad}}</span>
+	  				<span class="text-error" ng-show="!nameshow && csValidate(formSent,contactForm.name.$error.minlength || contactForm.name.$error.maxlength,contactForm.name.$pristine)">{{'error_member_name_size'|trad}}</span>
+	  			</div>
+			  
+			  	<div class="controls controls-row">
+		  			<input type="email" name="email" 
+		  				ng-blur ng-focus
+		  				ng-model="myContactForm.email" 
+		  				required
+		  				placeholder="{{'label_email'|trad}}"
+		  				class="span6"
+		  			>
+		  			<span class="clear"></span>
+				    <span class="text-error" ng-show="!emailshow && csValidate(formSent,contactForm.email.$error.required,contactForm.email.$pristine)">{{'error_member_email_missing'|trad}}</span>
+			    	<span class="text-error" ng-show="!emailshow && csValidate(formSent,contactForm.email.$error.email,contactForm.email.$pristine)">{{'error_member_email_invalid'|trad}}</span>
+		    	</div>
+		    	
+		    	<div class="controls controls-row">
+		  			<input type="text" name="subject" 
+		  				ng-blur ng-focus
+		  				ng-model="myContactForm.subject" 
+		  				required
+		  				ng-minlength="2"
+		  				ng-maxlength="100"
+		  				placeholder="{{'label_subject'|trad}}"
+		  				class="span6"
+		  			>
+		  			<span class="clear"></span>
+				    <span class="text-error" ng-show="!subjectshow && csValidate(formSent,contactForm.subject.$error.required,contactForm.subject.$pristine)">{{'error_contact_subject_missing'|trad}}</span>
+		    		<span class="text-error" ng-show="!subjectshow && csValidate(formSent,contactForm.subject.$error.minlength || contactForm.subject.$error.maxlength,contactForm.subject.$pristine)">{{'error_contact_subject_size'|trad}}</span>		    	
+		    	</div>
+			  	
+			  	<div class="controls controls-row">
+			    	<textarea name="message" ng-model="myContactForm.message" 
+		  				rows=5
+		  				cols=40
+		  				ng-minlength="10"
+		  				ng-maxlength="5000"
+		  				ng-blur ng-focus
+		  				placeholder="{{'label_message'|trad}}"
+		  				required
+		  				class="span12"
+		  			></textarea>
+		  			<span class="clear"></span>
+		  			<span class="text-error" ng-show="!messageshow && csValidate(formSent,contactForm.message.$error.minlength || contactForm.message.$error.maxlength,contactForm.message.$pristine)">{{'error_contact_message_size'|trad}}</span>
+				    <span class="text-error" ng-show="!messageshow && csValidate(formSent,contactForm.message.$error.required,contactForm.message.$pristine)">{{'error_contact_message_missing'|trad}}</span>
+			  	</div>
+		  	</div>
+		  
+		  	<div class="form-actions">
+		    	<input type="submit" class="btn btn-primary sendingMessage" data-loading-text="{{'label_loading'|trad}}" value="{{'label_send'|trad}}" />
+		    </div>
+		</form>	
+	</div> 	
+</div>

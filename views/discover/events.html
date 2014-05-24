@@ -1,0 +1,52 @@
+<div id="{{eventsTemplate}}">
+	<div class="padding">
+		<div class="row-fluid ">
+			<div class="span6">
+				<div class="btn-group " ng-model="eventsTemplate" bs-buttons-radio>
+					<button tooltip data-placement="bottom" title="" data-original-title="{{'label_display_map' | trad}}" type="button" class="btn" value="events-cards">
+						<i class="icon-map-marker"></i>
+					</button>
+					<button tooltip data-placement="bottom" title="" data-original-title="{{'label_display_list' | trad}}" type="button" class="btn" value="events-list">
+						<i class="icon-list"></i>
+					</button>
+				</div>
+			</div>
+			<div class="span6">
+				<div class="btn-group pull-right">
+	
+					<button subscribe ng-show="isLogged" ng-click="show()" class="btn" tooltip data-placement="bottom" title="{{'label_create_alert'|trad}}">
+						<i class="icon-bell-alt"></i> {{'label_alerts'|trad}}
+					</button>
+					
+					<button class="btn" share tooltip data-placement="bottom" title="{{'label_share'|trad}}">
+						<i class="icon-share"></i>
+					</button>
+					
+					<!--<button class="btn dropdown-toggle" data-toggle="dropdown" tooltip data-placement="bottom" title="{{'label_more'|trad}}">
+						<span ng-hide="isLogged">{{'label_more'|trad}}</span>
+						<span class="caret"></span>
+					</button>
+
+					<ul class="dropdown-menu pull-right">
+						<li>
+							<a href="javascript:;">{{'label_share'|trad}}</a>
+						</li>
+					</ul>-->
+				</div>
+			</div>
+		</div>
+			
+		<div class="margin-top">
+			<a class="btn btn-success btn-block" ng-show="isLogged" href="#/addEvent">{{'label_organize'|trad}}</a>
+			<a class="btn btn-success btn-block" ng-show="!isLogged" href="#/addEvent">{{'label_organize_login'|trad}}</a>
+		</div>
+		
+		<hr />
+
+		<ng-include src="Config.templatesPublicURL+'discover/'+ eventsTemplate +'.html'"></ng-include>
+	</div>
+</div>
+
+<div class="footer-absolute">
+	<ng-include src="Config.templatesPublicURL+'includes/footer.html'"></ng-include>
+</div>

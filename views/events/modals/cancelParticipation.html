@@ -1,0 +1,34 @@
+<div class="modal-header" >
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  	<h3>{{'modal_cancel_participation_title'|trad}}</h3>
+</div>
+
+<div class="modal-body">
+	<div class="alert alert-error">
+		{{'modal_cancel_participation_content1'|trad}}
+	</div>
+		
+	<div class="alert alert-info">
+		{{'modal_cancel_participation_content2'|trad}}
+	</div>
+	
+	<p ng-bind-html-unsafe="'modal_cancel_participation_content3'|trad"></p>
+  	
+  	<div ng-show="role == 'accepted_participation'">
+	  	<hr />
+	  	
+	  	{{"modal_cancel_participation_content4"|trad}}
+	  	  	
+	  	<form class="margin-top">
+	  		<div class="row-fluid">
+	  			<textarea type="text" class="span12" ng-model="reason" placeholder="{{'label_why_cancel_participation'|trad}}"></textarea>
+			</div>
+		</form>
+	</div>
+</div>
+	
+<div class="modal-footer">
+	<button class="btn btn-success" ng-click="dismiss()">{{'label_back'|trad}}</button>
+
+	<input type="submit" class="btn btn-danger cancellingParticipant" data-loading-text="{{'label_loading'|trad}}" ng-click="confirmedCancelParticipant(reason,hide)" value="{{'label_cancel_participation'|trad}}"/>
+</div>

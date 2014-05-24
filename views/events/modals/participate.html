@@ -1,0 +1,53 @@
+<div class="modal-header" >
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+ 	<h3>{{'modal_participation_title'|trad}}</h3>
+</div>
+
+<div class="span6 offset2" ng-show="loading" ><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+
+<div class="modal-body">
+	<div class="alert alert-warning" ng-show="sameDaysEvents.length > 0">	
+		{{'modal_participation_same_events'|trad}}
+		
+		<br/>
+		
+		<ul>
+			<li ng-repeat="ev in sameDaysEvents">
+				<a href="{{'#/events/' + ev.id + '/' + cleanUrl(ev.title)}}">{{ev.title}}</a> {{[ev.startTimestamp,ev.endTimestamp] |formatedDate}}
+			</li>
+		</ul>
+				
+		{{'modal_participation_same_events_2'|trad}}
+	</div>
+	
+	<div class="alert alert-info" ng-hide="placesArray && placesArray.length > 1">
+		{{'modal_participation_content_no_guests'|trad}}
+	</div>
+	
+	<div ng-show="placesArray && placesArray.length > 1">
+		<p ng-bind-html-unsafe="'modal_participation_content'|trad"></p>
+	  	
+	  	<hr />
+	  	
+	  	<form class="form-horizontal" ng-show="placesArray.length > 1">
+	  		<div class="control-group">
+		    	<label class="control-label">{{'label_guests_number'|trad}}</label>
+	    		
+	    		<div class="controls" ng-hide="eventSettings.places > 0">
+	  				<input type="number" min="0" max="4" placeholder="{{'label_guests_number'|trad}}" ng-model="guests">
+	  			</div>
+	  		
+	  			<div class="controls" ng-show="eventSettings.places > 0">
+	  				<select ng-model="guests" ng-options="value as value for (index, value) in placesArray">
+			          
+			        </select>
+	  			</div>
+	  		</div>
+	  	</form>
+	 </div>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-info" ng-click="dismiss()">{{'label_back'|trad}}</button>
+	<button ng-show="!loading" class="btn btn-success participating" data-loading-text="{{'label_loading'|trad}}" ng-click="participate(guests,hide)">{{'label_participate'|trad}}</button>
+</div>

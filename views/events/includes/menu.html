@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs">
+	<li class="{{isPageActive('event.general')}}">
+		<a href="{{'#/events/' + eventSettings.id + '/' + cleanUrl(eventSettings.title)}}">{{'label_information'|trad}}</a>
+	</li>
+	<li class="{{isPageActive('event.participations')}}" ng-show="see('event.participations')">
+		<a href="{{'#/events/' + eventSettings.id + '/' + cleanUrl(eventSettings.title) + '/participations'}}" >{{'label_participations'|trad}}</a>
+	</li>
+	<li class="{{isPageActive('event.photos')}}" ng-show="see('event.photos')">
+		<a href="{{'#/events/' + eventSettings.id + '/' + cleanUrl(eventSettings.title) + '/photos'}}">{{'label_photos'|trad}}</a>
+	</li>
+	<li class="{{isPageActive('event.settings')}}" ng-show="see('event.settings')">
+		<a href="{{'#/events/' + eventSettings.id + '/' + cleanUrl(eventSettings.title) + '/settings'}}">{{'label_settings'|trad}}</a>
+	</li>
+	<span class="clear"></span>
+</ul>

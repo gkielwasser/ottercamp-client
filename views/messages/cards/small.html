@@ -1,0 +1,15 @@
+<div class="row-fluid">
+	<div class="span2">
+		<a href="#/users/{{resource.from.id}}">
+			<img ng-src="{{resource.from.smallPhoto}}" />
+		</a>
+	</div>
+	
+	<div class="span10">
+	    <div>
+	    	<a href="#/users/{{resource.from.id}}">{{resource.from.fullName}}</a> <small class="pull-right">({{[resource.timestamp] |formatedDate}})</small>
+	    </div>
+	    
+	    <p>{{resource.content}}</p>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+<!--<div ng-show="addressLabel" class="alert alert-success span12">
+	<div class="span10">{{addressLabel}}</div>
+	<div class=""><a class="btn add-on pull-right" ng-click="edit()" ><i class="icon-remove"></i></a></div>
+</div>-->
+
+<div ng-show="addressLabel">
+	<div class="input-append row-fluid">
+		<input type="text" ng-model="addressLabel" readonly class="span12"/>
+		
+		<div class="btn add-on" tooltip data-title="{{'label_edit_address'|trad}}" ng-click="edit()"><i class="icon-edit"></i></div>
+	</div>
+</div>
+
+<div ng-hide="addressLabel">
+	<div class="dropdown {{showDropdown()}}" ng-init="initPicker()">
+		<div class="input-append row-fluid">
+			<input type="text" 			
+				placeholder="{{'label_address_example'|trad}}" 
+				class="dropdown-toggle span12" 
+				ng-model="search" 			
+				data-toggle="dropdown" 
+				ng-change="refresh()"
+				>
+			<!--tooltip data-title="{{'label_my_address'|trad}}"-->
+			<a class="btn add-on" 
+				ng-show="showMyAddress()" 
+				ng-click="getMyAddress()"
+				tooltip data-title="{{'label_my_address'|trad}}"
+			><i class="icon-home"></i></a>
+		</div>
+		
+		<ul ng-show="currentPlaces.length > 0" class="dropdown-menu" style="" role="menu" aria-labelledby="dLabel">
+			<li ng-repeat="place in places | limitTo:nbResults">
+				<a href="javascript:;" ng-click="setPlace($index)">{{place}}</a>
+			</li>
+		</ul>
+		
+		<span class="clear"></span>
+	</div>
+</div>

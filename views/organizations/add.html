@@ -1,0 +1,188 @@
+<style>
+	#preview-wrapper {
+	    overflow: hidden; 
+	    position: relative;
+	}
+	
+	#preview {
+	    position: absolute;
+	}
+</style>
+
+<div id="add_organization" ng-init="initAddOrganization()">
+	<div class="block margin-top" ng-hide="create">
+		<div class="header nav-header padding" >
+			{{'label_my_organizations'|trad}}
+		</div>
+		
+		<div class="padding" >
+			<div class="alert alert-info">
+				<div>{{'label_organizations_information'|trad}}</div>
+				
+				<button class="btn btn-success btn-small margin-top" ng-click="create = true" ng-hide="create">{{'label_add_organization'|trad}}</button>
+			</div>
+			
+			<div ng-show="organizations.length > 0" class="row-fluid">
+				<custom ng-repeat="organization in organizations">
+					<custom ng-switch on="$index % 2">
+		            	<custom ng-switch-when="0">
+			                <div class="row-fluid" ng-hide="userList.length == 0">							    
+			                    <div ng-show="organizations[$index+0]" class="block span6 margin-top" >
+			                    	<card					
+										data-format="medium" 
+										data-type="organizations" 
+										data-resource="organizations[$index+0]">
+									</card>
+			                    </div>
+			                    <div ng-show="organizations[$index+1]" class="block span6 margin-top" >
+			                    	<card				
+										data-format="medium" 
+										data-type="organizations" 
+										data-resource="organizations[$index+1]">
+									</card>
+			                    </div>
+			                </div>
+			            </custom>
+			        </custom>
+				</custom>
+			</div>
+			
+			<div ng-show="organizations.length == 0 && !loading" class="alert alert-info">
+				{{'label_no_organization_information'|trad}}
+			</div>
+		</div>
+		<div class="span6 offset5 margin-top" ng-show="loading" ><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+	</div>
+		
+	<div class="block margin-top" ng-show="create">
+		<div class="header nav-header padding">
+			{{'label_add_organization'|trad}}
+		</div>
+		
+		<div class="margin-top">
+			<form name="organizationForm" novalidate>
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="padding-left">
+							<div class="row-fluid">
+								<div ng-switch on="photo" class="span4 block control-label">
+							       <div ng-switch-when="true" id="preview-wrapper">
+							       		<img id="preview" ng-cloak src="" />
+							       </div>
+							    </div>
+			
+								<div class="span8">
+									<span class="btn btn-success fileinput-button">
+						                <i class="icon-plus icon-white"></i>
+						                <span>{{'label_upload_event'|trad}}</span>
+						                <input file-upload cs-type="OrganizationCtrl" id="photo" type="file" name="photo" />				                
+						            </span>
+						            
+						            <hr ng-show="photo" />
+						            
+						            <div ng-show="photo" class="alert alert-success">
+						            	<button type="button" class="close" ng-click="files=[];photo=false;">×</button>
+						            	{{files[0].name}}
+						            </div>
+								</div>
+							</div>
+							
+							<hr />
+							
+							<div class="row-fluid">
+								<div class="controls controls-row margin-top">
+									<input ng-blur ng-focus type="text" name="name" ng-model="organization.name"
+										placeholder="{{'label_organization_name'|trad}}"
+										required
+										ng-minlength="2"
+										ng-maxlength="50"
+										class="span12"
+									>
+					
+									<span class="clear"></span>
+					
+									<span class="text-error" ng-show="!nameshow && csValidate(formSent,organizationForm.name.$error.required,organizationForm.name.$pristine)">{{'error_organization_name_missing'|trad}}</span>
+									<span class="text-error" ng-show="!nameshow && csValidate(formSent,organizationForm.name.$error.minlength || organizationForm.name.$error.maxlength,organizationForm.name.$pristine)">{{'error_organization_name_size'|trad}}</span>
+								</div>
+								
+								<div class="controls controls-row margin-top">
+									<input ng-blur ng-focus type="text" name="website" ng-model="organization.website"
+										placeholder="{{'label_website'|trad}}"
+										class="span12"
+										ng-pattern="/((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/"
+									>
+									
+									<span class="clear"></span>
+									
+									<span class="text-error" ng-show="!websiteshow && csValidate(formSent,organizationForm.website.$error.pattern,organizationForm.website.$pristine)">{{'error_website_invalid'|trad}}</span>
+								</div>
+								
+								<hr/>
+								
+								<!-- Description -->
+								<div class="controls controls-row">
+									<div ng-blur ng-focus
+									rich-text-editor
+									name="description"
+									ng-model="organization.description"
+									placeholder="{{'label_description'|trad}}"
+									required
+									ng-minlength="10"
+									ng-maxlength="5000"
+									></div>
+				
+									<span class="clear"></span>
+				
+									<span class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,organizationForm.description.$error.required,organizationForm.description.$pristine)">{{'error_organization_description_missing'|trad}}</span>
+									<span  class="text-error" ng-show="!descriptionshow &&  csValidate(formSent,organizationForm.description.$error.length || organizationForm.description.$error.length,organizationForm.description.$pristine)">{{'error_organization_description_size'|trad}}</span>
+								</div>
+								
+								<hr />
+								
+								<!-- Address -->
+								<div class="controls controls-row">
+									<geoloc-picker 
+										formated-address="formatedAddress" 
+										address-label="search"
+										my-address="true"
+										class="span12"
+									></geoloc-picker>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="span6">
+						<div class="block margin-right">
+							<div class="header nav-header padding">{{'label_options'|trad}}</div>
+							
+							<div class="padding">
+								<div class="controls">
+									<label class="checkbox">
+										<input type="checkbox" name="asCommunity" checked="checked" ng-model="organization.asCommunity" />
+										{{'label_add_organization_community'|trad}}
+										
+										<i class="icon-question-sign" popover data-trigger="hover" data-title="{{'label_information'|trad}}" data-content="{{'label_asCommunity_information'|trad}}"></i>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<div class="pull-left">
+						<button class="btn" ng-click="create = false" ng-show="create">{{'label_cancel'|trad}}</button>
+						<loader data-classes="btn btn-primary" data-sending="sending" data-action="submit" data-label="label_validate"></loader>
+					</div>
+							
+					<div ng-show="photo" class="pull-left padding5 text-info">
+				       {{'label_long_time_information_organization'|trad}}
+			      	</div>
+	
+					<span class="clear"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>	

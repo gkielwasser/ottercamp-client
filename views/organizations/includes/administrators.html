@@ -1,0 +1,87 @@
+<div id="administrators" ng-init="initAdministrators()">
+	<div ng-hide="loading" ng-show="!add">
+		
+		<div class="alert alert-info" >
+			{{'label_administrators_information'|trad}}
+		</div>
+		
+		<form name="administratorForm" novalidate>
+			<div class="controls">
+				<div>
+					{{'label_add_administrator_information'|trad}}
+				</div>
+				
+				<div class="input-append margin-top">
+	  				<input type="text" name="administrator" ng-blur ng-focus
+	  					ng-model="administrator" 
+	  					placeholder="{{'label_username'|trad}}"
+	  					required 
+	  					ng-minlength="4" 
+	  					ng-maxlength="30"
+	  					ng-pattern="/^[a-zA-Z0-9 -.]/"
+	  					class="input-xlarge"
+	  				>
+	  				<button class="btn ng-binding" ng-click="add = false" ng-show="add" style="">{{'label_cancel'|trad}}</button>
+	  				<loader data-classes="btn btn-primary" data-sending="sending" data-action="submit" data-label="label_add"></loader>	
+				</div>
+      			
+      			<span class="clear"></span>
+      			
+      			<span class="text-error" ng-show="!administratorshow && csValidate(formSent,administratorForm.administrator.$error.pattern,administratorForm.administrator.$pristine)">{{'error_member_login_invalid'|trad}}</span>
+		      	<span class="text-error" ng-show="!administratorshow && csValidate(formSent,administratorForm.administrator.$error.required,administratorForm.administrator.$pristine)">{{'error_member_login_missing'|trad}}</span>
+	    		<span class="text-error" ng-show="!administratorshow && csValidate(formSent,administratorForm.administrator.$error.minlength || administratorForm.administrator.$error.maxlength,administratorForm.administrator.$pristine)">{{'error_member_login_size'|trad}}</span>
+			</div>
+		</form>
+		
+		<hr />
+		
+		<div ng-show="!administrators || administrators.length == 0" class="alert alert-success">
+			{{'label_no_administrator_information'|trad}}
+		</div>
+		
+		<div ng-show="administrators.length > 0" class="row-fluid" ng-hide="add">
+			<custom ng-repeat="organization in administrators">
+				<custom ng-switch on="$index % 2">
+	            	<custom ng-switch-when="0">
+		                <div class="row-fluid" ng-hide="userList.length == 0">
+		                    <div ng-show="administrators[$index+0]" class="block span6 margin-top">
+		                    	<button type="button" class="close margin-top margin-right"
+		                    		ng-click="deleteAdministrator(administrators[$index+0].id)"
+		                    		tooltip
+		                    		data-trigger="hover"
+		                    		data-title="{{'label_delete_administrator'|trad}}"
+		                    	>
+		                    		×
+		                    	</button>
+		                    	
+		                    	<card
+									data-format="medium" 
+									data-type="users" 
+									data-resource="administrators[$index+0]">
+								</card>
+		                    </div>
+		                    
+		                    <div ng-show="administrators[$index+1]" class="block span6 margin-top">
+								<button type="button" class="close margin-top margin-right"
+		                    		ng-click="deleteAdministrator(administrators[$index+1].id)"
+		                    		tooltip
+		                    		data-trigger="hover"
+		                    		data-title="{{'label_delete_administrator'|trad}}"
+		                    	>
+		                    		×
+		                    	</button>		                    
+		                    	<card				
+									data-format="medium" 
+									data-type="users" 
+									data-resource="administrators[$index+1]">
+								</card>
+		                    </div>
+		                </div>
+		            </custom>
+		        </custom>
+			</custom>
+		</div>
+	</div>
+	
+	<div class="span6 offset5 margin-top" ng-show="loading" ><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+</div>	

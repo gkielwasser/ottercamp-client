@@ -1,0 +1,21 @@
+<div ng-click="seeConversation(message.conversation.id)" class="text-left">
+	<div class="row-fluid">
+		<div class="span2">
+			<a href="#/users/{{message.from.id}}">
+				<img ng-src="{{message.from.smallPhoto}}">
+			</a>
+		</div>
+		
+		<div class="span9">
+		    <div>
+		    	<a href="#/users/{{message.from.id}}">{{message.from.fullName}}</a>
+		    </div>
+		    		    
+		    <div>
+		    	 <small>{{[message.timestamp] |formatedDate}}</small>
+		    </div>
+		    
+		    <p>{{message.content}}</p>
+		</div>
+	</div>
+</div>

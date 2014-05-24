@@ -1,0 +1,33 @@
+<div class="modal-header" >
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	<h3>{{"modal_payment_title"|trad}}</h3>
+</div>
+
+<div class="modal-body">
+	<div class="alert alert-info" ng-bind-html-unsafe="'modal_payment_content1'|trad"></div>
+	
+    <div ng-switch on="eventSettings.participation.guests > 0">
+       <div ng-switch-when="true"><p angular-html-bind="modal_payment_content2"></p></div>
+    </div>
+    
+    <hr />
+    
+    <div class="row-fluid">
+    	<div class="span8">
+    		<b>{{"modal_payment_amount"|trad}}</b>
+    	</div>
+    	<div class="span4">
+    		<div class="padding label label-success pull-right" style="font-size:22px;">
+    			<div ng-switch on="eventSettings.participation.guests > 0">
+       				<div ng-switch-when="true">{{((eventSettings.participation.guests + 1) * eventSettings.fullPrice)|currency}}</div>
+       				<div ng-switch-when="false">{{eventSettings.fullPrice|currency}}</div>
+       			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+
+<div class="modal-footer">
+	<a class="btn btn-primary" ng-click="dismiss()">{{"label_back"|trad}}</a>
+	<input type="submit" data-loading-text="{{'label_loading'|trad}}" value="{{'label_pay_participation'|trad}}" class="btn btn-success paying" ng-click="confirmedPayment(hide)"/>
+</div>

@@ -1,0 +1,24 @@
+<div class="navbar navbar-fixed-top" ng-cloak ng-show="showNav">
+    <div class="navbar-inner">
+        <div class="container text-center">
+        	<ul class="nav">            	
+                <li tooltip data-placement="bottom" title="{{'label_discover'|trad}}">
+                	<a href="#/" id="brand"></a>
+                </li>
+            </ul>
+        	
+        	<search></search>  
+			
+			<ul class="nav" ng-show="user.id != null">			
+				<li tooltip data-placement="bottom" title="{{'label_my_events'|trad}}"><a href="#/users/{{user.id}}/events"><i class="icon-home icon-book icon-white"></i></a></li>					
+			</ul>
+			
+			<a id="typo" class="visible-desktop"><img src="assets/images/typo-40.png" /></a>
+
+            <div class="nav pull-right">
+                <!-- box utilisateur courrant -->
+                <user-box></user-box>
+        	</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div id="inbox" class="block margin-top container" ng-init="initInbox()">		
+	<div class="header nav-header padding">{{'label_my_conversations'|trad}}</div>
+
+	<div class="margin-top padding-bottom" ng-hide="loading">
+		<div class="row-fluid">
+			<div class="span4 padding conversations">
+				<div class="row-fluid">
+					<input ng-show="conversations.length > 0" class="span12" type="text" ng-model="searchTerm" placeholder="{{'label_search_small'|trad}}">
+				</div>
+				
+				<div ng-hide="conversations.length > 0" class="alert alert-info">{{'label_no_conversations'|trad}}</div>	
+				
+				<div class="border-top padding-top padding-right padding-bottom link" ng-click="loadConversation(conversation.id)" ng-show="conversations.length > 0" class="media" ng-repeat="conversation in conversations | filter:searchTerm">
+					<div class="row-fluid">
+						<a href="#/users/{{conversation[conversation.dest].id}}">
+							<img class="span2" ng-src="{{conversation[conversation.dest].smallPhoto}}">
+						</a>
+						
+						<div class="span10" ng-class="{{isUnreadConversation(conversation.lastMessage.readed)}}">
+							<card data-resource="conversation" data-format="small" data-type="conversations"></card>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div ui-view class="span8 messages">
+				<div class="alert alert-info text-center margin-top" ng-hide="state.current.name == 'inbox.new' || state.current.name == 'inbox.detail'">{{'label_conversation_unselected'|trad}}</div>
+			</div>
+			
+			<div ng-show="loadingConversation"><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+		</div>
+	</div>
+	
+	<div class="offset5" ng-show="loading"><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+</div>
+
+<div class="footer-absolute">
+	<ng-include src="Config.templatesPublicURL+'includes/footer.html'"></ng-include>
+</div>

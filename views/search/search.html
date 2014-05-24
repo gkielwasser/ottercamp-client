@@ -1,0 +1,63 @@
+<div id="search" class="block margin-top" fade ng-init="initSearchCtrl()" ng-cloack>	
+	<div class="header nav-header padding">{{userList.length}} {{'label_search_results'|trad}} "{{keyword}}"</div>
+
+	<div class="padding" ng-hide="loading">
+		<!-- utilisateurs -->
+		<custom ng-switch on="kind">
+			<custom ng-switch-when="users">
+				<div class="alert alert-info" ng-show="!userList || userList.length == 0">
+					{{'label_no_search_users'|trad}}
+				</div>
+				
+	       		<custom ng-repeat="user in userList">
+					<custom ng-switch on="$index % 2">
+		            	<custom ng-switch-when="0">
+			                <div class="row-fluid" ng-hide="userList.length == 0">
+			                    <div ng-show="userList[$index+0]" class="block span6 margin-top" ><card fade data-type="users" data-format="medium" data-resource="userList[$index+0]"></card></div>
+			                    <div ng-show="userList[$index+1]" class="block span6 margin-top" ><card fade data-type="users" data-format="medium" data-resource="userList[$index+1]"></card></div>
+			                </div>
+			            </custom>
+			        </custom>
+				</custom>
+	       	</custom>
+	       	
+	       	<!-- Organisations -->
+	       	<custom ng-switch-when="organizations">
+	       		<div class="alert alert-info" ng-show="!organizationsList || organizationsList.length == 0">
+					{{'label_no_search_organizations'|trad}}
+				</div>
+				
+	       		<custom ng-repeat="organization in organizationsList">
+					<custom ng-switch on="$index % 2">
+		            	<custom ng-switch-when="0">			                
+			                <div class="row-fluid" ng-hide="organizationsList.length == 0">
+			                    <div ng-show="organizationsList[$index+0]" class="block span6 margin-top" ><card fade data-type="organizations" data-format="medium" data-resource="organizationsList[$index+0]"></card></div>
+			                    <div ng-show="organizationsList[$index+1]" class="block span6 margin-top" ><card fade data-type="organizations" data-format="medium" data-resource="organizationsList[$index+1]"></card></div>
+			                </div>
+			            </custom>
+			        </custom>
+				</custom>
+	       	</custom>
+	       	
+	       	<!-- Communautés -->
+	       	<custom ng-switch-when="communities">
+	       		<div class="alert alert-info" ng-show="!communitiesList || communitiesList.length == 0">
+					{{'label_no_search_communities'|trad}}
+				</div>
+				
+	       		<custom ng-repeat="community in communitiesList">
+					<custom ng-switch on="$index % 2">
+		            	<custom ng-switch-when="0">			                
+			                <div class="row-fluid" ng-hide="communitiesList.length == 0">
+			                    <div ng-show="communitiesList[$index+0]" class="block span6 margin-top" ><card fade data-type="organizations" data-format="medium" data-resource="communitiesList[$index+0]"></card></div>
+			                    <div ng-show="communitiesList[$index+1]" class="block span6 margin-top" ><card fade data-type="organizations" data-format="medium" data-resource="communitiesList[$index+1]"></card></div>
+			                </div>
+			            </custom>
+			        </custom>
+				</custom>
+	       	</custom>
+	    </custom>
+	</div>
+	
+	<div class="offset5" ng-show="loading"><img class="intern-loader" src="assets/images/ajax-loader.gif"></div>
+</div>

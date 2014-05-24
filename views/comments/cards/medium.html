@@ -1,0 +1,17 @@
+<div class="row-fluid">
+	<div class="span2">
+		<a href="#/users/{{resource.member.id}}"> <img class="media-object" ng-src="{{resource.member.smallPhoto}}"> </a>
+	</div>
+
+	<div class="span10">
+		<div>
+			<a href="#/users/{{resource.member.id}}"> {{resource.member.fullName}} </a>
+
+			<small>({{resource.timestamp |date: ('internationalization_datehour'|trad)}})</small>
+
+			<p class="text-justify">
+				{{resource.content}}
+			</p>
+		</div>
+	</div>
+</div>
